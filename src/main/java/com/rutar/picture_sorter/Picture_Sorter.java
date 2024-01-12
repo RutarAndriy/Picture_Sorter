@@ -1,11 +1,17 @@
 package com.rutar.picture_sorter;
 
+import com.formdev.flatlaf.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-public class Picture_Sorter extends javax.swing.JFrame {
+public class Picture_Sorter extends JFrame {
+
+///////////////////////////////////////////////////////////////////////////////
+
+final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
+final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -243,9 +249,12 @@ setLocationRelativeTo(null);
     private void set_Path(ActionEvent evt) {//GEN-FIRST:event_set_Path
 
         JToggleButton btn = (JToggleButton) evt.getSource();
-        String name = btn.isSelected() ? "folder" : "plus";
         
-        btn.setIcon(new ImageIcon(getClass().getResource(String.format("/com/rutar/picture_sorter/icons/x16/%s.png", name))));
+        String name = String.format(s_icon + "%s.png",
+                                    btn.isSelected() ? "folder" : "plus");
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource(name));
+        btn.setIcon(icon);
         
     }//GEN-LAST:event_set_Path
 
@@ -253,9 +262,7 @@ setLocationRelativeTo(null);
 
 public static void main (String args[]) {
 
-//try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); }
-//catch (Exception e) {}
-
+FlatDarculaLaf.setup();
 EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 
 }

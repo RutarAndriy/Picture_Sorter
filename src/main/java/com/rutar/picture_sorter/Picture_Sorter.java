@@ -1,6 +1,7 @@
 package com.rutar.picture_sorter;
 
 import com.formdev.flatlaf.*;
+import com.formdev.flatlaf.util.SystemInfo;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -57,6 +58,7 @@ setLocationRelativeTo(null);
         menu_about = new JMenu();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Picture Sorter");
 
         btn_move_delete.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_redo.png"))); // NOI18N
         btn_move_delete.setMargin(new Insets(5, 5, 5, 5));
@@ -263,6 +265,12 @@ setLocationRelativeTo(null);
 public static void main (String args[]) {
 
 FlatDarculaLaf.setup();
+
+if (SystemInfo.isLinux) {
+    JFrame .setDefaultLookAndFeelDecorated(true);
+    JDialog.setDefaultLookAndFeelDecorated(true);
+}
+
 EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 
 }

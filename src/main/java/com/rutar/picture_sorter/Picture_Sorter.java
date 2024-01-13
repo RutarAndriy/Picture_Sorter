@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.util.*;
+import com.rutar.ua_translator.UA_Translator;
 
 public class Picture_Sorter extends JFrame {
 
@@ -40,6 +41,8 @@ setLocationRelativeTo(null);
         btn_center = new JButton();
         btn_minus = new JButton();
         btn_plus = new JButton();
+        btn_undo = new JButton();
+        btn_redo = new JButton();
         panel_center = new JSplitPane();
         sp_1 = new JScrollPane();
         tree = new JTree();
@@ -64,22 +67,47 @@ setLocationRelativeTo(null);
         setTitle("Picture Sorter");
 
         btn_move_delete.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/cut.png"))); // NOI18N
+        btn_move_delete.setFocusPainted(false);
         btn_move_delete.setMargin(new Insets(5, 5, 5, 5));
+        btn_move_delete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                set_processing_mode(evt);
+            }
+        });
 
         btn_fold_unfold.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_out.png"))); // NOI18N
+        btn_fold_unfold.setFocusPainted(false);
         btn_fold_unfold.setMargin(new Insets(5, 5, 5, 5));
+        btn_fold_unfold.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                set_view_mode(evt);
+            }
+        });
 
         btn_center.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/distribution_partnerships.png"))); // NOI18N
+        btn_center.setFocusPainted(false);
         btn_center.setMargin(new Insets(5, 5, 5, 5));
         btn_center.setPreferredSize(btn_fold_unfold.getPreferredSize());
 
         btn_minus.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/magnifier_zoom_out.png"))); // NOI18N
+        btn_minus.setFocusPainted(false);
         btn_minus.setMargin(new Insets(5, 5, 5, 5));
         btn_minus.setPreferredSize(btn_fold_unfold.getPreferredSize());
 
         btn_plus.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/magnifier_zoom_in.png"))); // NOI18N
+        btn_plus.setFocusPainted(false);
         btn_plus.setMargin(new Insets(5, 5, 5, 5));
         btn_plus.setPreferredSize(btn_fold_unfold.getPreferredSize());
+
+        btn_undo.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_undo.png"))); // NOI18N
+        btn_undo.setFocusPainted(false);
+        btn_undo.setMargin(new Insets(5, 5, 5, 5));
+        btn_undo.setPreferredSize(btn_fold_unfold.getPreferredSize());
+
+        btn_redo.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_redo.png"))); // NOI18N
+        btn_redo.setFocusPainted(false);
+        btn_redo.setMargin(new Insets(5, 5, 5, 5));
+        btn_redo.setPreferredSize(btn_fold_unfold.getPreferredSize());
 
         GroupLayout panel_topLayout = new GroupLayout(panel_top);
         panel_top.setLayout(panel_topLayout);
@@ -87,6 +115,10 @@ setLocationRelativeTo(null);
             .addGroup(GroupLayout.Alignment.TRAILING, panel_topLayout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addComponent(btn_move_delete)
+                .addGap(3, 3, 3)
+                .addComponent(btn_undo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addComponent(btn_redo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_plus, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
@@ -101,6 +133,8 @@ setLocationRelativeTo(null);
             .addGroup(panel_topLayout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_redo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_undo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_plus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_minus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -163,6 +197,7 @@ setLocationRelativeTo(null);
         panel_bottom.setLayout(new GridLayout(1, 0, 3, 3));
 
         path_01.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_01.setFocusPainted(false);
         path_01.setMargin(new Insets(5, 5, 5, 5));
         path_01.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -172,6 +207,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_01);
 
         path_02.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_02.setFocusPainted(false);
         path_02.setMargin(new Insets(5, 5, 5, 5));
         path_02.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -181,6 +217,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_02);
 
         path_03.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_03.setFocusPainted(false);
         path_03.setMargin(new Insets(5, 5, 5, 5));
         path_03.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -190,6 +227,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_03);
 
         path_04.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_04.setFocusPainted(false);
         path_04.setMargin(new Insets(5, 5, 5, 5));
         path_04.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -199,6 +237,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_04);
 
         path_05.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_05.setFocusPainted(false);
         path_05.setMargin(new Insets(5, 5, 5, 5));
         path_05.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -208,6 +247,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_05);
 
         path_06.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_06.setFocusPainted(false);
         path_06.setMargin(new Insets(5, 5, 5, 5));
         path_06.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -217,6 +257,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_06);
 
         path_07.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_07.setFocusPainted(false);
         path_07.setMargin(new Insets(5, 5, 5, 5));
         path_07.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -226,6 +267,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_07);
 
         path_08.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_08.setFocusPainted(false);
         path_08.setMargin(new Insets(5, 5, 5, 5));
         path_08.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -235,6 +277,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_08);
 
         path_09.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_09.setFocusPainted(false);
         path_09.setMargin(new Insets(5, 5, 5, 5));
         path_09.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -339,8 +382,33 @@ setLocationRelativeTo(null);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+    private void set_view_mode(ActionEvent evt) {//GEN-FIRST:event_set_view_mode
+
+        boolean selected = btn_fold_unfold.isSelected();
+        String name = String.format(s_icon + "%s.png",
+                                    selected ? "arrow_in" : "arrow_out");
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource(name));
+        btn_fold_unfold.setIcon(icon);
+        
+    }//GEN-LAST:event_set_view_mode
+
+    private void set_processing_mode(ActionEvent evt) {//GEN-FIRST:event_set_processing_mode
+        
+        boolean selected = btn_move_delete.isSelected();
+        String name = String.format(s_icon + "%s.png",
+                                    selected ? "calendar_copy" : "cut");
+        
+        ImageIcon icon = new ImageIcon(getClass().getResource(name));
+        btn_move_delete.setIcon(icon);
+
+    }//GEN-LAST:event_set_processing_mode
+
+///////////////////////////////////////////////////////////////////////////////
+
 public static void main (String args[]) {
 
+UA_Translator.init();    
 FlatDarculaLaf.setup();
 
 if (SystemInfo.isLinux) {
@@ -360,6 +428,8 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JButton btn_minus;
     private JToggleButton btn_move_delete;
     private JButton btn_plus;
+    private JButton btn_redo;
+    private JButton btn_undo;
     private JLabel label_image;
     private JMenu menu_about;
     private JMenuBar menu_bar;

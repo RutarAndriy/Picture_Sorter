@@ -41,11 +41,26 @@
 
     <dependencies>
         
+        <!-- Look and Feel -->
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.3</version>
         </dependency>
+        
+        <!-- Бібліотека для відображення діалогових вікон -->
+        <dependency>
+            <groupId>com.github.RutarAndriy</groupId>
+            <artifactId>JMessenger</artifactId>
+            <version>v1.0.0</version>
+        </dependency>
+        
+        <!-- Українська локалізація елементів інтерфейсу -->
+        <dependency>
+	    <groupId>com.github.RutarAndriy</groupId>
+	    <artifactId>UA_Translator</artifactId>
+	    <version>v1.0.0</version>
+	</dependency>
         
         <!-- JUnit тести -->
         <dependency>

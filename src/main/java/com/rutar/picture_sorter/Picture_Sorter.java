@@ -1,11 +1,10 @@
 package com.rutar.picture_sorter;
 
-import com.formdev.flatlaf.*;
-import com.formdev.flatlaf.util.SystemInfo;
 import java.awt.*;
-import java.awt.event.*;
-
 import javax.swing.*;
+import java.awt.event.*;
+import com.formdev.flatlaf.*;
+import com.formdev.flatlaf.util.*;
 
 public class Picture_Sorter extends JFrame {
 
@@ -13,6 +12,9 @@ public class Picture_Sorter extends JFrame {
 
 final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
 final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
+
+final Cursor cursor_hand = new Cursor(Cursor.HAND_CURSOR);
+final Cursor cursor_move = new Cursor(Cursor.MOVE_CURSOR);
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +31,8 @@ setLocationRelativeTo(null);
 ///////////////////////////////////////////////////////////////////////////////
     
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
         panel_top = new JPanel();
         btn_move_delete = new JToggleButton();
@@ -60,13 +63,13 @@ setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Picture Sorter");
 
-        btn_move_delete.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_redo.png"))); // NOI18N
+        btn_move_delete.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/cut.png"))); // NOI18N
         btn_move_delete.setMargin(new Insets(5, 5, 5, 5));
 
         btn_fold_unfold.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_out.png"))); // NOI18N
         btn_fold_unfold.setMargin(new Insets(5, 5, 5, 5));
 
-        btn_center.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/cross.png"))); // NOI18N
+        btn_center.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/distribution_partnerships.png"))); // NOI18N
         btn_center.setMargin(new Insets(5, 5, 5, 5));
         btn_center.setPreferredSize(btn_fold_unfold.getPreferredSize());
 
@@ -115,6 +118,27 @@ setLocationRelativeTo(null);
         panel_center.setLeftComponent(sp_1);
 
         label_image.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x32/picture_sunset.png"))); // NOI18N
+        label_image.setAutoscrolls(true);
+        label_image.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        label_image.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent evt) {
+                image_dragged(evt);
+            }
+        });
+        label_image.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent evt) {
+                image_entered(evt);
+            }
+            public void mouseExited(MouseEvent evt) {
+                image_exited(evt);
+            }
+            public void mousePressed(MouseEvent evt) {
+                image_pressed(evt);
+            }
+            public void mouseReleased(MouseEvent evt) {
+                image_released(evt);
+            }
+        });
 
         GroupLayout panel_imageLayout = new GroupLayout(panel_image);
         panel_image.setLayout(panel_imageLayout);
@@ -232,7 +256,7 @@ setLocationRelativeTo(null);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(panel_bottom, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panel_top, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panel_center)
+            .addComponent(panel_center, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -246,7 +270,7 @@ setLocationRelativeTo(null);
 
         setSize(new Dimension(328, 230));
         setLocationRelativeTo(null);
-    }//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
     private void set_Path(ActionEvent evt) {//GEN-FIRST:event_set_Path
 
@@ -259,6 +283,59 @@ setLocationRelativeTo(null);
         btn.setIcon(icon);
         
     }//GEN-LAST:event_set_Path
+
+///////////////////////////////////////////////////////////////////////////////
+    
+    private Point origin;
+    private JViewport viewport;
+
+    private void image_released(MouseEvent evt) {//GEN-FIRST:event_image_released
+        label_image.setCursor(cursor_move);
+    }//GEN-LAST:event_image_released
+
+    private void image_pressed(MouseEvent evt) {//GEN-FIRST:event_image_pressed
+        origin = new Point(evt.getPoint());
+        label_image.setCursor(cursor_hand);
+    }//GEN-LAST:event_image_pressed
+
+///////////////////////////////////////////////////////////////////////////////
+
+    private boolean drug_image_out;
+    private boolean cursor_on_image;
+    
+    private void image_dragged(MouseEvent evt) {//GEN-FIRST:event_image_dragged
+        
+    if (origin != null) {
+                      
+        if (!drug_image_out && !cursor_on_image) { return; }
+        
+        viewport = (JViewport) SwingUtilities
+                   .getAncestorOfClass(JViewport.class, label_image);
+        
+        if (viewport != null) {
+            
+            int deltaX = origin.x - evt.getX();
+            int deltaY = origin.y - evt.getY();
+
+            Rectangle view = viewport.getViewRect();
+            view.x += deltaX;
+            view.y += deltaY;
+
+            label_image.scrollRectToVisible(view);
+            
+        }
+    }
+    }//GEN-LAST:event_image_dragged
+
+///////////////////////////////////////////////////////////////////////////////
+    
+    private void image_exited(MouseEvent evt) {//GEN-FIRST:event_image_exited
+        cursor_on_image = false;
+    }//GEN-LAST:event_image_exited
+
+    private void image_entered(MouseEvent evt) {//GEN-FIRST:event_image_entered
+        cursor_on_image = true;
+    }//GEN-LAST:event_image_entered
 
 ///////////////////////////////////////////////////////////////////////////////
 

@@ -1,21 +1,28 @@
 package com.rutar.picture_sorter;
 
+import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.util.*;
-import com.rutar.ua_translator.UA_Translator;
+
+import com.rutar.ua_translator.*;
+
+// ............................................................................
 
 public class Picture_Sorter extends JFrame {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
-final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
+private final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
+private final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
 
-final Cursor cursor_hand = new Cursor(Cursor.HAND_CURSOR);
-final Cursor cursor_move = new Cursor(Cursor.MOVE_CURSOR);
+private final Cursor cursor_hand = new Cursor(Cursor.HAND_CURSOR);
+private final Cursor cursor_move = new Cursor(Cursor.MOVE_CURSOR);
+
+private final String[] pathes = new String[9];
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -197,6 +204,7 @@ setLocationRelativeTo(null);
         panel_bottom.setLayout(new GridLayout(1, 0, 3, 3));
 
         path_01.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_01.setActionCommand("path_0");
         path_01.setFocusPainted(false);
         path_01.setMargin(new Insets(5, 5, 5, 5));
         path_01.addActionListener(new ActionListener() {
@@ -207,6 +215,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_01);
 
         path_02.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_02.setActionCommand("path_1");
         path_02.setFocusPainted(false);
         path_02.setMargin(new Insets(5, 5, 5, 5));
         path_02.addActionListener(new ActionListener() {
@@ -217,6 +226,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_02);
 
         path_03.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_03.setActionCommand("path_2");
         path_03.setFocusPainted(false);
         path_03.setMargin(new Insets(5, 5, 5, 5));
         path_03.addActionListener(new ActionListener() {
@@ -227,6 +237,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_03);
 
         path_04.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_04.setActionCommand("path_3");
         path_04.setFocusPainted(false);
         path_04.setMargin(new Insets(5, 5, 5, 5));
         path_04.addActionListener(new ActionListener() {
@@ -237,6 +248,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_04);
 
         path_05.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_05.setActionCommand("path_4");
         path_05.setFocusPainted(false);
         path_05.setMargin(new Insets(5, 5, 5, 5));
         path_05.addActionListener(new ActionListener() {
@@ -247,6 +259,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_05);
 
         path_06.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_06.setActionCommand("path_5");
         path_06.setFocusPainted(false);
         path_06.setMargin(new Insets(5, 5, 5, 5));
         path_06.addActionListener(new ActionListener() {
@@ -257,6 +270,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_06);
 
         path_07.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_07.setActionCommand("path_6");
         path_07.setFocusPainted(false);
         path_07.setMargin(new Insets(5, 5, 5, 5));
         path_07.addActionListener(new ActionListener() {
@@ -267,6 +281,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_07);
 
         path_08.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_08.setActionCommand("path_7");
         path_08.setFocusPainted(false);
         path_08.setMargin(new Insets(5, 5, 5, 5));
         path_08.addActionListener(new ActionListener() {
@@ -277,6 +292,7 @@ setLocationRelativeTo(null);
         panel_bottom.add(path_08);
 
         path_09.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/plus.png"))); // NOI18N
+        path_09.setActionCommand("path_8");
         path_09.setFocusPainted(false);
         path_09.setMargin(new Insets(5, 5, 5, 5));
         path_09.addActionListener(new ActionListener() {
@@ -318,6 +334,25 @@ setLocationRelativeTo(null);
     private void set_Path(ActionEvent evt) {//GEN-FIRST:event_set_Path
 
         JToggleButton btn = (JToggleButton) evt.getSource();
+        int btn_index = Integer.parseInt(btn.getActionCommand().split("_")[1]);
+        
+        JFileChooser file_chooser = new JFileChooser();
+        file_chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        int result = file_chooser.showOpenDialog(this);
+        File selected_file = file_chooser.getSelectedFile();
+        
+        if (result == JFileChooser.APPROVE_OPTION) {
+            String path = selected_file.getAbsolutePath();
+            pathes[btn_index] = path;
+            btn.setToolTipText(path);
+        }
+        
+        else {
+            btn.setSelected(false);
+            btn.setToolTipText(null);
+            pathes[btn_index] = null;
+        }
         
         String name = String.format(s_icon + "%s.png",
                                     btn.isSelected() ? "folder" : "plus");

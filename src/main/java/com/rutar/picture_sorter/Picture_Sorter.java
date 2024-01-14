@@ -34,6 +34,32 @@ setMinimumSize( getSize() );
 setSize(680, 520);
 setLocationRelativeTo(null);
 
+KeyboardFocusManager.getCurrentKeyboardFocusManager()
+                    .addKeyEventDispatcher(key_event_dispatcher);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+private final KeyEventDispatcher key_event_dispatcher = (KeyEvent e) -> {
+    
+    if (e.getID() != KeyEvent.KEY_PRESSED) { return false; }
+    
+    int key_code = e.getKeyChar();
+    
+    if (key_code < 48 || key_code > 57) { return false; }
+    else                                { key_code -= 48; }
+    
+    number_Pressed(key_code);
+    return false;
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
+private void number_Pressed (int number) {
+    
+    System.out.println("Number: " + number);
+    
 }
 
 ///////////////////////////////////////////////////////////////////////////////

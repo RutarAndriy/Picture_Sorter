@@ -59,7 +59,7 @@
         <dependency>
 	    <groupId>com.github.RutarAndriy</groupId>
 	    <artifactId>UA_Translator</artifactId>
-	    <version>v1.0.0</version>
+	    <version>v1.1.0</version>
 	</dependency>
         
         <!-- JUnit тести -->

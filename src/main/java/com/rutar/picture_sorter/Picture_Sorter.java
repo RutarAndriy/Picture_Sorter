@@ -2,8 +2,11 @@ package com.rutar.picture_sorter;
 
 import java.io.*;
 import java.awt.*;
+import java.util.*;
 import javax.swing.*;
+import java.awt.dnd.*;
 import java.awt.event.*;
+import java.awt.datatransfer.*;
 
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.util.*;
@@ -36,6 +39,9 @@ setLocationRelativeTo(null);
 
 KeyboardFocusManager.getCurrentKeyboardFocusManager()
                     .addKeyEventDispatcher(key_event_dispatcher);
+
+new DropTarget(panel_center, drop_target_listener);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -64,6 +70,59 @@ private void number_Pressed (int number) {
 
 ///////////////////////////////////////////////////////////////////////////////
     
+private final DropTargetListener drop_target_listener
+        = new DropTargetAdapter() {
+
+@Override
+public void drop (DropTargetDropEvent event) {
+
+event.acceptDrop(DnDConstants.ACTION_COPY);
+Transferable transferable = event.getTransferable();
+DataFlavor[] flavors = transferable.getTransferDataFlavors();
+
+for (DataFlavor flavor : flavors) {
+
+    try {
+
+        if (flavor.isFlavorJavaFileListType()) {
+
+            ArrayList<File> files = (ArrayList) transferable.getTransferData(flavor);
+
+            for (File file : files) {
+
+                System.out.println("File path is '" + file.getPath() + "'.");
+
+            }
+        }
+
+    }
+    
+    catch (Exception e) {}
+    
+}
+
+event.dropComplete(true);
+
+}
+
+// ............................................................................
+
+@Override
+public void dragEnter (DropTargetDragEvent e) {
+    System.out.println("Drop Enter");
+}
+
+// ............................................................................
+
+@Override
+public void dragExit (DropTargetEvent e) {
+    System.out.println("Drop Exit");
+}
+             
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

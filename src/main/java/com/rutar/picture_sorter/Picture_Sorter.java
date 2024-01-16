@@ -6,6 +6,7 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
+import javax.swing.border.*;
 import java.awt.datatransfer.*;
 
 import com.formdev.flatlaf.*;
@@ -18,6 +19,9 @@ import com.rutar.ua_translator.*;
 public class Picture_Sorter extends JFrame {
 
 ///////////////////////////////////////////////////////////////////////////////
+
+private final Color drop_enter = new Color(0x6666ff);
+private final Color drop_exit  = new Color(0x777777);
 
 private final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
 private final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
@@ -40,7 +44,7 @@ setLocationRelativeTo(null);
 KeyboardFocusManager.getCurrentKeyboardFocusManager()
                     .addKeyEventDispatcher(key_event_dispatcher);
 
-new DropTarget(panel_center, drop_target_listener);
+new DropTarget(panel_dropable, drop_target_listener);
 
 }
 
@@ -87,10 +91,12 @@ for (DataFlavor flavor : flavors) {
         if (flavor.isFlavorJavaFileListType()) {
 
             ArrayList<File> files = (ArrayList) transferable.getTransferData(flavor);
-
+            
             for (File file : files) {
 
                 System.out.println("File path is '" + file.getPath() + "'.");
+                ((CardLayout)panel_dropable.getLayout()).last(panel_dropable);
+                
 
             }
         }
@@ -101,6 +107,7 @@ for (DataFlavor flavor : flavors) {
     
 }
 
+panel_drop.setBorder(get_Border(drop_exit));
 event.dropComplete(true);
 
 }
@@ -109,17 +116,28 @@ event.dropComplete(true);
 
 @Override
 public void dragEnter (DropTargetDragEvent e) {
-    System.out.println("Drop Enter");
+    panel_drop.setBorder(get_Border(drop_enter));
 }
 
 // ............................................................................
 
 @Override
 public void dragExit (DropTargetEvent e) {
-    System.out.println("Drop Exit");
+    panel_drop.setBorder(get_Border(drop_exit));
 }
              
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+private CompoundBorder get_Border (Color color) {
+    
+Border inside = new LineBorder(color, 2, true);
+Border outside = BorderFactory.createEmptyBorder(7, 7, 7, 7);
+
+return BorderFactory.createCompoundBorder(outside, inside);
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -136,9 +154,11 @@ public void dragExit (DropTargetEvent e) {
         btn_undo = new JButton();
         btn_redo = new JButton();
         panel_center = new JSplitPane();
-        sp_1 = new JScrollPane();
-        tree = new JTree();
-        sp_2 = new JScrollPane();
+        sp_left = new JScrollPane();
+        panel_dropable = new JPanel();
+        panel_drop = new JPanel();
+        tree_files = new JTree();
+        sp_right = new JScrollPane();
         panel_image = new JPanel();
         label_image = new JLabel();
         panel_bottom = new JPanel();
@@ -238,10 +258,27 @@ public void dragExit (DropTargetEvent e) {
 
         panel_center.setDividerLocation(200);
 
-        tree.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 0));
-        sp_1.setViewportView(tree);
+        panel_dropable.setPreferredSize(new Dimension(0, 0));
+        panel_dropable.setLayout(new CardLayout());
 
-        panel_center.setLeftComponent(sp_1);
+        panel_drop.setBorder(get_Border(drop_exit)
+        );
+
+        GroupLayout panel_dropLayout = new GroupLayout(panel_drop);
+        panel_drop.setLayout(panel_dropLayout);
+        panel_dropLayout.setHorizontalGroup(panel_dropLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 194, Short.MAX_VALUE)
+        );
+        panel_dropLayout.setVerticalGroup(panel_dropLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGap(0, 94, Short.MAX_VALUE)
+        );
+
+        panel_dropable.add(panel_drop, "card3");
+        panel_dropable.add(tree_files, "card4");
+
+        sp_left.setViewportView(panel_dropable);
+
+        panel_center.setLeftComponent(sp_left);
 
         label_image.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x32/picture_sunset.png"))); // NOI18N
         label_image.setAutoscrolls(true);
@@ -281,9 +318,9 @@ public void dragExit (DropTargetEvent e) {
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        sp_2.setViewportView(panel_image);
+        sp_right.setViewportView(panel_image);
 
-        panel_center.setRightComponent(sp_2);
+        panel_center.setRightComponent(sp_right);
 
         panel_bottom.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         panel_bottom.setLayout(new GridLayout(1, 0, 3, 3));
@@ -406,7 +443,7 @@ public void dragExit (DropTargetEvent e) {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panel_top, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panel_center, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addComponent(panel_center)
                 .addGap(3, 3, 3)
                 .addComponent(panel_bottom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3))
@@ -556,6 +593,8 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JMenu menu_file;
     private JPanel panel_bottom;
     private JSplitPane panel_center;
+    private JPanel panel_drop;
+    private JPanel panel_dropable;
     private JPanel panel_image;
     private JPanel panel_top;
     private JToggleButton path_01;
@@ -567,8 +606,8 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JToggleButton path_07;
     private JToggleButton path_08;
     private JToggleButton path_09;
-    private JScrollPane sp_1;
-    private JScrollPane sp_2;
-    private JTree tree;
+    private JScrollPane sp_left;
+    private JScrollPane sp_right;
+    private JTree tree_files;
     // End of variables declaration//GEN-END:variables
 }

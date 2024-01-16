@@ -258,6 +258,8 @@ return BorderFactory.createCompoundBorder(outside, inside);
 
         panel_center.setDividerLocation(200);
 
+        sp_left.setMinimumSize(new Dimension(100, 0));
+
         panel_dropable.setPreferredSize(new Dimension(0, 0));
         panel_dropable.setLayout(new CardLayout());
 
@@ -279,6 +281,8 @@ return BorderFactory.createCompoundBorder(outside, inside);
         sp_left.setViewportView(panel_dropable);
 
         panel_center.setLeftComponent(sp_left);
+
+        sp_right.setMinimumSize(new Dimension(100, 100));
 
         label_image.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x32/picture_sunset.png"))); // NOI18N
         label_image.setAutoscrolls(true);

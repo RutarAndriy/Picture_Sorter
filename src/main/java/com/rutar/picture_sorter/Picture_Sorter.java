@@ -90,15 +90,15 @@ for (DataFlavor flavor : flavors) {
 
         if (flavor.isFlavorJavaFileListType()) {
 
-            ArrayList<File> files = (ArrayList) transferable.getTransferData(flavor);
+            File[] files = ((java.util.List<File>) transferable
+                            .getTransferData(flavor)).toArray(new File[0]);
             
             for (File file : files) {
 
-                System.out.println("File path is '" + file.getPath() + "'.");
-                ((CardLayout)panel_dropable.getLayout()).last(panel_dropable);
-                
+                System.out.println("File path: " + file.getPath());
 
             }
+            
         }
 
     }
@@ -107,6 +107,7 @@ for (DataFlavor flavor : flavors) {
     
 }
 
+((CardLayout)panel_dropable.getLayout()).last(panel_dropable);
 panel_drop.setBorder(get_Border(drop_exit));
 event.dropComplete(true);
 

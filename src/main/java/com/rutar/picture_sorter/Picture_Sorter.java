@@ -2,10 +2,10 @@ package com.rutar.picture_sorter;
 
 import java.io.*;
 import java.awt.*;
-import java.util.*;
 import javax.swing.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
+import javax.swing.tree.*;
 import javax.swing.border.*;
 import java.awt.datatransfer.*;
 
@@ -13,6 +13,7 @@ import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.util.*;
 
 import com.rutar.ua_translator.*;
+import com.rutar.picture_sorter.Picture_Sorter.*;
 
 // ............................................................................
 
@@ -23,13 +24,15 @@ public class Picture_Sorter extends JFrame {
 private final Color drop_enter = new Color(0x6666ff);
 private final Color drop_exit  = new Color(0x777777);
 
-private final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
-private final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
-
 private final Cursor cursor_hand = new Cursor(Cursor.HAND_CURSOR);
 private final Cursor cursor_move = new Cursor(Cursor.MOVE_CURSOR);
 
 private final String[] pathes = new String[9];
+
+// ............................................................................
+
+public final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
+public final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -93,17 +96,12 @@ for (DataFlavor flavor : flavors) {
             File[] files = ((java.util.List<File>) transferable
                             .getTransferData(flavor)).toArray(new File[0]);
             
-            for (File file : files) {
-
-                System.out.println("File path: " + file.getPath());
-
-            }
+            create_File_Tree(files);
             
         }
-
     }
     
-    catch (Exception e) {}
+    catch (Exception e) { System.out.println(e); }
     
 }
 
@@ -128,6 +126,24 @@ public void dragExit (DropTargetEvent e) {
 }
              
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+private void create_File_Tree (File[] files) {
+    
+Tree_File_Node root = new Tree_File_Node();
+
+for (File file : files) {
+
+    Tree_File_Node node = new Tree_File_Node(file);
+    root.add(node);
+
+}
+
+tree_files.setModel(new DefaultTreeModel(root));
+panel_dropable.updateUI();
+    
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -184,7 +200,7 @@ return BorderFactory.createCompoundBorder(outside, inside);
         btn_move_delete.setMargin(new Insets(5, 5, 5, 5));
         btn_move_delete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                set_processing_mode(evt);
+                set_Processing_Mode(evt);
             }
         });
 
@@ -193,7 +209,7 @@ return BorderFactory.createCompoundBorder(outside, inside);
         btn_fold_unfold.setMargin(new Insets(5, 5, 5, 5));
         btn_fold_unfold.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                set_view_mode(evt);
+                set_View_Mode(evt);
             }
         });
 
@@ -276,8 +292,11 @@ return BorderFactory.createCompoundBorder(outside, inside);
             .addGap(0, 94, Short.MAX_VALUE)
         );
 
-        panel_dropable.add(panel_drop, "card3");
-        panel_dropable.add(tree_files, "card4");
+        panel_dropable.add(panel_drop, "card_drop");
+
+        tree_files.setModel(null);
+        tree_files.setCellRenderer(new Icon_Node_Renderer());
+        panel_dropable.add(tree_files, "card_tree");
 
         sp_left.setViewportView(panel_dropable);
 
@@ -544,7 +563,7 @@ return BorderFactory.createCompoundBorder(outside, inside);
 
 ///////////////////////////////////////////////////////////////////////////////
 
-    private void set_view_mode(ActionEvent evt) {//GEN-FIRST:event_set_view_mode
+    private void set_View_Mode(ActionEvent evt) {//GEN-FIRST:event_set_View_Mode
 
         boolean selected = btn_fold_unfold.isSelected();
         String name = String.format(s_icon + "%s.png",
@@ -553,9 +572,9 @@ return BorderFactory.createCompoundBorder(outside, inside);
         ImageIcon icon = new ImageIcon(getClass().getResource(name));
         btn_fold_unfold.setIcon(icon);
         
-    }//GEN-LAST:event_set_view_mode
+    }//GEN-LAST:event_set_View_Mode
 
-    private void set_processing_mode(ActionEvent evt) {//GEN-FIRST:event_set_processing_mode
+    private void set_Processing_Mode(ActionEvent evt) {//GEN-FIRST:event_set_Processing_Mode
         
         boolean selected = btn_move_delete.isSelected();
         String name = String.format(s_icon + "%s.png",
@@ -564,7 +583,7 @@ return BorderFactory.createCompoundBorder(outside, inside);
         ImageIcon icon = new ImageIcon(getClass().getResource(name));
         btn_move_delete.setIcon(icon);
 
-    }//GEN-LAST:event_set_processing_mode
+    }//GEN-LAST:event_set_Processing_Mode
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -615,4 +634,66 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JScrollPane sp_right;
     private JTree tree_files;
     // End of variables declaration//GEN-END:variables
+
+///////////////////////////////////////////////////////////////////////////////
+
+class Tree_File_Node extends DefaultMutableTreeNode {
+
+protected File file;
+protected Icon icon;
+
+// ............................................................................
+
+public Tree_File_Node() { this(null); }
+
+// ............................................................................
+
+public Tree_File_Node (Object object) {
+    
+super(object, true);
+
+String icon_name;
+file = (File) object;
+
+if (file == null || file.isDirectory()) { icon_name = "folder_blue"; }
+else                                    { icon_name = "picture_sunset"; }
+
+icon_name = String.format(s_icon + "%s.png", icon_name);
+icon = new ImageIcon(getClass().getResource(icon_name));
+
+}
+
+// ............................................................................
+
+public File   get_File() { return file; }
+public Icon   get_Icon() { return icon; }
+
+public String get_Text() { return file != null ? file.getName() : "/"; }
+
+// ............................................................................
+
+}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+class Icon_Node_Renderer extends DefaultTreeCellRenderer {
+
+@Override
+public Component getTreeCellRendererComponent (JTree tree, Object object,
+                                               boolean sel, boolean expanded,
+                                               boolean leaf, int row,
+                                               boolean hasFocus) {
+
+super.getTreeCellRendererComponent(tree, object, sel,
+                                   expanded, leaf, row, hasFocus);
+
+Tree_File_Node node = (Tree_File_Node) object;
+
+setText(node.get_Text());
+setIcon(node.get_Icon());
+
+return this;
+
+}
 }

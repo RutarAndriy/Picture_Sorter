@@ -47,7 +47,7 @@ setLocationRelativeTo(null);
 KeyboardFocusManager.getCurrentKeyboardFocusManager()
                     .addKeyEventDispatcher(key_event_dispatcher);
 
-new DropTarget(panel_dropable, drop_target_listener);
+new DropTarget(sp_left, drop_target_listener);
 
 }
 
@@ -105,7 +105,7 @@ for (DataFlavor flavor : flavors) {
     
 }
 
-((CardLayout)panel_dropable.getLayout()).last(panel_dropable);
+((CardLayout)sp_left.getLayout()).last(sp_left);
 panel_drop.setBorder(get_Border(drop_exit));
 event.dropComplete(true);
 
@@ -140,8 +140,8 @@ for (File file : files) {
 
 }
 
-tree_files.setModel(new DefaultTreeModel(root));
-panel_dropable.updateUI();
+tree.setModel(new DefaultTreeModel(root));
+sp_left.updateUI();
     
 }
 
@@ -171,10 +171,10 @@ return BorderFactory.createCompoundBorder(outside, inside);
         btn_undo = new JButton();
         btn_redo = new JButton();
         panel_center = new JSplitPane();
-        sp_left = new JScrollPane();
-        panel_dropable = new JPanel();
+        sp_left = new JPanel();
         panel_drop = new JPanel();
-        tree_files = new JTree();
+        sp_tree = new JScrollPane();
+        tree = new JTree();
         sp_right = new JScrollPane();
         panel_image = new JPanel();
         label_image = new JLabel();
@@ -275,10 +275,8 @@ return BorderFactory.createCompoundBorder(outside, inside);
 
         panel_center.setDividerLocation(200);
 
-        sp_left.setMinimumSize(new Dimension(100, 0));
-
-        panel_dropable.setPreferredSize(new Dimension(0, 0));
-        panel_dropable.setLayout(new CardLayout());
+        sp_left.setMinimumSize(new Dimension(150, 0));
+        sp_left.setLayout(new CardLayout());
 
         panel_drop.setBorder(get_Border(drop_exit)
         );
@@ -286,19 +284,19 @@ return BorderFactory.createCompoundBorder(outside, inside);
         GroupLayout panel_dropLayout = new GroupLayout(panel_drop);
         panel_drop.setLayout(panel_dropLayout);
         panel_dropLayout.setHorizontalGroup(panel_dropLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
         panel_dropLayout.setVerticalGroup(panel_dropLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 94, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        panel_dropable.add(panel_drop, "card_drop");
+        sp_left.add(panel_drop, "card_drop");
 
-        tree_files.setModel(null);
-        tree_files.setCellRenderer(new Icon_Node_Renderer());
-        panel_dropable.add(tree_files, "card_tree");
+        tree.setModel(null);
+        tree.setCellRenderer(new Icon_Node_Renderer());
+        sp_tree.setViewportView(tree);
 
-        sp_left.setViewportView(panel_dropable);
+        sp_left.add(sp_tree, "card4");
 
         panel_center.setLeftComponent(sp_left);
 
@@ -501,7 +499,7 @@ return BorderFactory.createCompoundBorder(outside, inside);
         }
         
         String name = String.format(s_icon + "%s.png",
-                                    btn.isSelected() ? "folder" : "plus");
+                                    btn.isSelected() ? "folder_blue" : "plus");
         
         ImageIcon icon = new ImageIcon(getClass().getResource(name));
         btn.setIcon(icon);
@@ -618,7 +616,6 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JPanel panel_bottom;
     private JSplitPane panel_center;
     private JPanel panel_drop;
-    private JPanel panel_dropable;
     private JPanel panel_image;
     private JPanel panel_top;
     private JToggleButton path_01;
@@ -630,9 +627,10 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JToggleButton path_07;
     private JToggleButton path_08;
     private JToggleButton path_09;
-    private JScrollPane sp_left;
+    private JPanel sp_left;
     private JScrollPane sp_right;
-    private JTree tree_files;
+    private JScrollPane sp_tree;
+    private JTree tree;
     // End of variables declaration//GEN-END:variables
 
 ///////////////////////////////////////////////////////////////////////////////

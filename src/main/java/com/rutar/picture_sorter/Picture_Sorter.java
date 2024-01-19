@@ -4,6 +4,7 @@ import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.dnd.*;
+import java.nio.file.*;
 import java.awt.event.*;
 import javax.swing.tree.*;
 import javax.swing.border.*;
@@ -135,8 +136,28 @@ Tree_File_Node root = new Tree_File_Node();
 
 for (File file : files) {
 
-    Tree_File_Node node = new Tree_File_Node(file);
-    root.add(node);
+    if (file.isFile()) {
+
+        try {
+            
+            String mimetype = Files.probeContentType(file.toPath());
+            
+            if (mimetype != null &&
+                mimetype.split("/")[0].equals("image")) {
+                
+                root.add(new Tree_File_Node(file));
+                
+            }
+            
+            else { System.out.println(file.getName() + " is not an image"); }
+            
+        }
+        
+        catch (Exception e) { continue; }
+
+    }
+    
+    else { root.add(new Tree_File_Node(file)); }
 
 }
 

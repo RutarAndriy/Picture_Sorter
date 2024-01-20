@@ -616,6 +616,8 @@ if (SystemInfo.isLinux) {
     JDialog.setDefaultLookAndFeelDecorated(true);
 }
 
+UIManager.put( "TitlePane.noIconLeftGap", 0);
+
 EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 
 }

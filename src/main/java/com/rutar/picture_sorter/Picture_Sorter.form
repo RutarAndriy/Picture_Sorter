@@ -9,6 +9,21 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="menu_settings">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Settings"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="menu_theme">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Theme"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="init_Themes_List(menu_theme);"/>
+              </AuxValues>
+            </Menu>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="menu_about">
           <Properties>
             <Property name="text" type="java.lang.String" value="About"/>
@@ -324,11 +339,11 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="image_dragged"/>
-                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_entered"/>
-                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_exited"/>
-                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_pressed"/>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_released"/>
+                    <EventHandler event="mouseDragged" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="image_Dragged"/>
+                    <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_Entered"/>
+                    <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_Exited"/>
+                    <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_Pressed"/>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="image_Released"/>
                   </Events>
                 </Component>
               </SubComponents>

@@ -15,6 +15,7 @@ import com.formdev.flatlaf.util.*;
 
 import com.rutar.ua_translator.*;
 import com.rutar.picture_sorter.Picture_Sorter.*;
+import javax.swing.plaf.metal.MetalIconFactory;
 
 // ............................................................................
 
@@ -28,12 +29,14 @@ private final Color drop_exit  = new Color(0x777777);
 private final Cursor cursor_hand = new Cursor(Cursor.HAND_CURSOR);
 private final Cursor cursor_move = new Cursor(Cursor.MOVE_CURSOR);
 
-private final String[] pathes = new String[9];
+private final String[] folder_pathes = new String[9];
 
 // ............................................................................
 
-public final String s_icon = "/com/rutar/picture_sorter/icons/x16/";
-public final String l_icon = "/com/rutar/picture_sorter/icons/x32/";
+public static final String S_ICON = "/com/rutar/picture_sorter/icons/x16/";
+public static final String L_ICON = "/com/rutar/picture_sorter/icons/x32/";
+
+public static final String THEME_PATH = "/com/rutar/picture_sorter/themes/";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -211,6 +214,8 @@ return BorderFactory.createCompoundBorder(outside, inside);
         path_09 = new JToggleButton();
         menu_bar = new JMenuBar();
         menu_file = new JMenu();
+        menu_settings = new JMenu();
+        menu_theme = new JMenu();
         menu_about = new JMenu();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -328,21 +333,21 @@ return BorderFactory.createCompoundBorder(outside, inside);
         label_image.setCursor(new Cursor(Cursor.MOVE_CURSOR));
         label_image.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent evt) {
-                image_dragged(evt);
+                image_Dragged(evt);
             }
         });
         label_image.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent evt) {
-                image_entered(evt);
+                image_Entered(evt);
             }
             public void mouseExited(MouseEvent evt) {
-                image_exited(evt);
+                image_Exited(evt);
             }
             public void mousePressed(MouseEvent evt) {
-                image_pressed(evt);
+                image_Pressed(evt);
             }
             public void mouseReleased(MouseEvent evt) {
-                image_released(evt);
+                image_Released(evt);
             }
         });
 
@@ -470,6 +475,14 @@ return BorderFactory.createCompoundBorder(outside, inside);
         menu_file.setText("File");
         menu_bar.add(menu_file);
 
+        menu_settings.setText("Settings");
+
+        menu_theme.setText("Theme");
+        init_Themes_List(menu_theme);
+        menu_settings.add(menu_theme);
+
+        menu_bar.add(menu_settings);
+
         menu_about.setText("About");
         menu_bar.add(menu_about);
 
@@ -509,17 +522,17 @@ return BorderFactory.createCompoundBorder(outside, inside);
         
         if (result == JFileChooser.APPROVE_OPTION) {
             String path = selected_file.getAbsolutePath();
-            pathes[btn_index] = path;
+            folder_pathes[btn_index] = path;
             btn.setToolTipText(path);
         }
         
         else {
             btn.setSelected(false);
             btn.setToolTipText(null);
-            pathes[btn_index] = null;
+            folder_pathes[btn_index] = null;
         }
         
-        String name = String.format(s_icon + "%s.png",
+        String name = String.format(S_ICON + "%s.png",
                                     btn.isSelected() ? "folder_blue" : "plus");
         
         ImageIcon icon = new ImageIcon(getClass().getResource(name));
@@ -532,21 +545,21 @@ return BorderFactory.createCompoundBorder(outside, inside);
     private Point origin;
     private JViewport viewport;
 
-    private void image_released(MouseEvent evt) {//GEN-FIRST:event_image_released
+    private void image_Released(MouseEvent evt) {//GEN-FIRST:event_image_Released
         label_image.setCursor(cursor_move);
-    }//GEN-LAST:event_image_released
+    }//GEN-LAST:event_image_Released
 
-    private void image_pressed(MouseEvent evt) {//GEN-FIRST:event_image_pressed
+    private void image_Pressed(MouseEvent evt) {//GEN-FIRST:event_image_Pressed
         origin = new Point(evt.getPoint());
         label_image.setCursor(cursor_hand);
-    }//GEN-LAST:event_image_pressed
+    }//GEN-LAST:event_image_Pressed
 
 ///////////////////////////////////////////////////////////////////////////////
 
     private boolean drug_image_out;
     private boolean cursor_on_image;
     
-    private void image_dragged(MouseEvent evt) {//GEN-FIRST:event_image_dragged
+    private void image_Dragged(MouseEvent evt) {//GEN-FIRST:event_image_Dragged
         
     if (origin != null) {
                       
@@ -568,24 +581,24 @@ return BorderFactory.createCompoundBorder(outside, inside);
             
         }
     }
-    }//GEN-LAST:event_image_dragged
+    }//GEN-LAST:event_image_Dragged
 
 ///////////////////////////////////////////////////////////////////////////////
     
-    private void image_exited(MouseEvent evt) {//GEN-FIRST:event_image_exited
+    private void image_Exited(MouseEvent evt) {//GEN-FIRST:event_image_Exited
         cursor_on_image = false;
-    }//GEN-LAST:event_image_exited
+    }//GEN-LAST:event_image_Exited
 
-    private void image_entered(MouseEvent evt) {//GEN-FIRST:event_image_entered
+    private void image_Entered(MouseEvent evt) {//GEN-FIRST:event_image_Entered
         cursor_on_image = true;
-    }//GEN-LAST:event_image_entered
+    }//GEN-LAST:event_image_Entered
 
 ///////////////////////////////////////////////////////////////////////////////
 
     private void set_View_Mode(ActionEvent evt) {//GEN-FIRST:event_set_View_Mode
 
         boolean selected = btn_fold_unfold.isSelected();
-        String name = String.format(s_icon + "%s.png",
+        String name = String.format(S_ICON + "%s.png",
                                     selected ? "arrow_in" : "arrow_out");
         
         ImageIcon icon = new ImageIcon(getClass().getResource(name));
@@ -596,7 +609,7 @@ return BorderFactory.createCompoundBorder(outside, inside);
     private void set_Processing_Mode(ActionEvent evt) {//GEN-FIRST:event_set_Processing_Mode
         
         boolean selected = btn_move_delete.isSelected();
-        String name = String.format(s_icon + "%s.png",
+        String name = String.format(S_ICON + "%s.png",
                                     selected ? "calendar_copy" : "cut");
         
         ImageIcon icon = new ImageIcon(getClass().getResource(name));
@@ -606,17 +619,80 @@ return BorderFactory.createCompoundBorder(outside, inside);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+private final String[] themes = new String[] { 
+      
+    "Flat_Light",
+    "Flat_Dark",
+    "Intellij",
+    "Darcula",
+    ":",
+    "Arc",
+    "Gray",
+    ":",
+    "Cobalt_2",
+    "Dark_Flat",
+    "GitHub_Dark",
+    "Gruvbox_Dark_Hard",
+    "Night_Owl"
+
+};
+
+// ............................................................................
+
+private void init_Themes_List (JMenu menu) {
+    
+    ButtonGroup group = new ButtonGroup();
+    
+    for (String theme : themes) {
+        
+        if (theme.equals(":")) { menu.add(new JSeparator()); }
+        else {
+        
+            JRadioButtonMenuItem item = new JRadioButtonMenuItem(theme);
+
+            item.setIcon(MetalIconFactory.getFileChooserHomeFolderIcon());
+            item.addActionListener(theme_listener);
+            menu.add(item);
+            group.add(item);
+        }
+    }    
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+private ActionListener theme_listener = (ActionEvent ae) -> {
+    
+    String theme = ((JMenuItem)ae.getSource()).getText();
+
+    switch (theme) {
+        case "Flat_Light": FlatLightLaf.setup();    break;
+        case "Flat_Dark":  FlatDarkLaf.setup();     break;
+        case "Intellij":   FlatIntelliJLaf.setup(); break;
+        case "Darcula":    FlatDarculaLaf.setup();  break;
+        
+        default: IntelliJTheme.setup(Picture_Sorter.class
+                .getResourceAsStream(THEME_PATH + theme + ".theme.json"));
+    }
+
+    SwingUtilities.updateComponentTreeUI(this);
+    
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
 public static void main (String args[]) {
 
-UA_Translator.init();    
-FlatDarculaLaf.setup();
+UA_Translator.init();
+IntelliJTheme.setup(Picture_Sorter.class
+             .getResourceAsStream(THEME_PATH + "GitHub_Dark.theme.json"));
 
 if (SystemInfo.isLinux) {
     JFrame .setDefaultLookAndFeelDecorated(true);
     JDialog.setDefaultLookAndFeelDecorated(true);
 }
 
-UIManager.put( "TitlePane.noIconLeftGap", 0);
+UIManager.put("TitlePane.noIconLeftGap", 0);
+UIManager.put("TitlePane.centerTitle", true);
 
 EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 
@@ -636,6 +712,8 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JMenu menu_about;
     private JMenuBar menu_bar;
     private JMenu menu_file;
+    private JMenu menu_settings;
+    private JMenu menu_theme;
     private JPanel panel_bottom;
     private JSplitPane panel_center;
     private JPanel panel_drop;
@@ -679,7 +757,7 @@ file = (File) object;
 if (file == null || file.isDirectory()) { icon_name = "folder_blue"; }
 else                                    { icon_name = "picture_sunset"; }
 
-icon_name = String.format(s_icon + "%s.png", icon_name);
+icon_name = String.format(S_ICON + "%s.png", icon_name);
 icon = new ImageIcon(getClass().getResource(icon_name));
 
 }

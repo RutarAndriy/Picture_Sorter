@@ -471,18 +471,18 @@ return BorderFactory.createCompoundBorder(outside, inside);
         });
         panel_bottom.add(path_09);
 
-        menu_file.setText("File");
+        menu_file.setText("Файл");
         menu_bar.add(menu_file);
 
-        menu_settings.setText("Settings");
+        menu_settings.setText("Налаштування");
 
-        menu_theme.setText("Theme");
+        menu_theme.setText("Тема");
         init_Themes_List(menu_theme);
         menu_settings.add(menu_theme);
 
         menu_bar.add(menu_settings);
 
-        menu_about.setText("About");
+        menu_about.setText("Інфо");
         menu_bar.add(menu_about);
 
         setJMenuBar(menu_bar);
@@ -620,19 +620,19 @@ return BorderFactory.createCompoundBorder(outside, inside);
 
 private final String[] themes = new String[] { 
       
-    "Flat_Light",
-    "Flat_Dark",
-    "Intellij",
-    "Darcula",
-    ":",
-    "Arc",
-    "Gray",
-    ":",
-    "Cobalt_2",
-    "Dark_Flat",
-    "GitHub_Dark",
-    "Gruvbox_Dark_Hard",
-    "Night_Owl"
+    "Flat_Light",        "light",
+    "Flat_Dark",         "dark",
+    "Intellij",          "light",
+    "Darcula",           "dark",
+    ":",                 "-",
+    "Arc",               "light",
+    "Gray",              "light",
+    ":",                 "-",
+    "Cobalt_2",          "dark",
+    "Dark_Flat",         "dark",
+    "GitHub_Dark",       "dark",
+    "Gruvbox_Dark_Hard", "dark",
+    "Night_Owl",         "dark"
 
 };
 
@@ -640,17 +640,30 @@ private final String[] themes = new String[] {
 
 private void init_Themes_List (JMenu menu) {
     
+    String name;
+    String theme;
     ButtonGroup group = new ButtonGroup();
     
-    for (String theme : themes) {
+    for (int z = 0; z < themes.length; z+=2) {
+        
+        theme = themes[z];
         
         if (theme.equals(":")) { menu.add(new JSeparator()); }
         else {
         
             JRadioButtonMenuItem item = new JRadioButtonMenuItem(theme);
 
-            item.setIcon(MetalIconFactory.getFileChooserHomeFolderIcon());
+            name = String.format(S_ICON + "%s.png",
+                          themes[z+1].equals("light") ? "weather_sun" :
+                                                        "weather_clouds");
+        
+            ImageIcon icon = new ImageIcon(getClass().getResource(name));
+            
+            item.setIcon(icon);
             item.addActionListener(theme_listener);
+            
+            if (theme.equals("GitHub_Dark")) { item.setSelected(true); }
+            
             menu.add(item);
             group.add(item);
         }

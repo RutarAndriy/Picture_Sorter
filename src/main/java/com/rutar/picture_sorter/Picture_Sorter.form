@@ -6,17 +6,17 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="menu_file">
           <Properties>
-            <Property name="text" type="java.lang.String" value="File"/>
+            <Property name="text" type="java.lang.String" value="&#x424;&#x430;&#x439;&#x43b;"/>
           </Properties>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_settings">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Settings"/>
+            <Property name="text" type="java.lang.String" value="&#x41d;&#x430;&#x43b;&#x430;&#x448;&#x442;&#x443;&#x432;&#x430;&#x43d;&#x43d;&#x44f;"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="menu_theme">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Theme"/>
+                <Property name="text" type="java.lang.String" value="&#x422;&#x435;&#x43c;&#x430;"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="init_Themes_List(menu_theme);"/>
@@ -26,7 +26,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_about">
           <Properties>
-            <Property name="text" type="java.lang.String" value="About"/>
+            <Property name="text" type="java.lang.String" value="&#x406;&#x43d;&#x444;&#x43e;"/>
           </Properties>
         </Menu>
       </SubComponents>

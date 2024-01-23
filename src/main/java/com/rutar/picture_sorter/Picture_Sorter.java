@@ -165,7 +165,6 @@ for (File file : files) {
 }
 
 tree.setModel(new DefaultTreeModel(root));
-sp_left.updateUI();
     
 }
 
@@ -674,8 +673,8 @@ private ActionListener theme_listener = (ActionEvent ae) -> {
                 .getResourceAsStream(THEME_PATH + theme + ".theme.json"));
     }
 
-    SwingUtilities.updateComponentTreeUI(this);
-    
+    FlatLaf.updateUI();
+
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -692,7 +691,7 @@ if (SystemInfo.isLinux) {
 }
 
 UIManager.put("TitlePane.noIconLeftGap", 0);
-UIManager.put("TitlePane.centerTitle", true);
+UIManager.put("TitlePane.titleMargins", new Insets(0, 8, 0, 8));
 
 EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 

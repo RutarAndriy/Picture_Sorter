@@ -20,6 +20,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="Utils.init_Themes_List(menu_theme);&#xa;"/>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
               </AuxValues>
             </Menu>
           </SubComponents>
@@ -86,14 +87,16 @@
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_processing_mode" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <Component id="btn_deleting_mode" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_undo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_redo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                  <Component id="btn_deleting_mode" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_levelup" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="135" max="32767" attributes="0"/>
+                  <EmptySpace pref="172" max="32767" attributes="0"/>
                   <Component id="btn_plus" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_minus" min="-2" max="-2" attributes="0"/>
@@ -107,18 +110,25 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btn_view_mode" max="-2" attributes="0"/>
-                      <Component id="btn_processing_mode" max="-2" attributes="0"/>
-                      <Component id="btn_levelup" max="-2" attributes="0"/>
-                      <Component id="btn_deleting_mode" max="-2" attributes="0"/>
-                      <Component id="btn_redo" max="-2" attributes="0"/>
-                      <Component id="btn_undo" max="-2" attributes="0"/>
-                      <Component id="btn_plus" max="-2" attributes="0"/>
-                      <Component id="btn_minus" max="-2" attributes="0"/>
-                      <Component id="btn_center" alignment="0" max="-2" attributes="0"/>
+                      <Component id="btn_levelup" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btn_undo" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="btn_plus" max="32767" attributes="0"/>
+                                  <Component id="btn_view_mode" max="32767" attributes="0"/>
+                                  <Component id="btn_center" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btn_minus" max="32767" attributes="0"/>
+                                  <Component id="btn_deleting_mode" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btn_processing_mode" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="btn_redo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               </Group>
@@ -289,6 +299,11 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
           </AuxValues>
         </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
+          <Properties>
+            <Property name="orientation" type="int" value="1"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JSplitPane" name="panel_center">
@@ -362,6 +377,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="tree.addTreeSelectionListener(Listeners.tree_selection_listener);&#xa;tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);&#xa;tree.setRootVisible(false);&#xa;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
                   </AuxValues>
                 </Component>
@@ -399,7 +415,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="label_image" max="32767" attributes="0"/>
+                          <Component id="label_image" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -412,11 +428,9 @@
                       <Image iconType="3" name="/com/rutar/picture_sorter/icons/x32/picture_sunset.png"/>
                     </Property>
                     <Property name="autoscrolls" type="boolean" value="true"/>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Move Cursor"/>
-                    </Property>
                   </Properties>
                   <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="label_image.addMouseListener(Listeners.image_mouse_listener);&#xa;label_image.addMouseMotionListener(Listeners.image_mouse_motion_listener);&#xa;"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
                   </AuxValues>
                 </Component>

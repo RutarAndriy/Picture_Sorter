@@ -8,6 +8,7 @@ import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.util.*;
 
 import static com.rutar.picture_sorter.Listeners.*;
+import static com.rutar.picture_sorter.Picture_Sorter.*;
 
 // ............................................................................
 
@@ -88,7 +89,7 @@ public static void init_Themes_List (JMenu menu) {
             item.setIcon(get_Icon(icon_name));
             item.addActionListener(theme_listener);
             
-            if (theme.equals("GitHub_Dark")) { item.setSelected(true); }
+            if (theme.equals(DEFAULT_APP_THEME)) { item.setSelected(true); }
             
             menu.add(item);
             group.add(item);

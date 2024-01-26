@@ -37,7 +37,7 @@ for (File file : files) {
             
         }
         
-        catch (Exception e) { }
+        catch (IOException e) { }
 
     }
     

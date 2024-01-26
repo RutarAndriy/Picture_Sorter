@@ -5,10 +5,13 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import com.rutar.ua_translator.*;
+import javax.swing.tree.TreeSelectionModel;
 
 // ............................................................................
 
 public class Picture_Sorter extends JFrame {
+
+public static final String DEFAULT_APP_THEME = "GitHub_Dark";
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -41,11 +44,15 @@ Processing.init(this);
         btn_minus = new JButton();
         btn_center = new JButton();
         btn_view_mode = new JButton();
+        jSeparator1 = new JSeparator();
         panel_center = new JSplitPane();
         sp_left = new JPanel();
         panel_drop = new JPanel();
         sp_tree = new JScrollPane();
         tree = new JTree();
+        tree.addTreeSelectionListener(Listeners.tree_selection_listener);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.setRootVisible(false);
         sp_right = new JScrollPane();
         panel_image = new JPanel();
         label_image = new JLabel();
@@ -159,6 +166,8 @@ Processing.init(this);
             }
         });
 
+        jSeparator1.setOrientation(SwingConstants.VERTICAL);
+
         GroupLayout panel_topLayout = new GroupLayout(panel_top);
         panel_top.setLayout(panel_topLayout);
         panel_topLayout.setHorizontalGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -166,14 +175,16 @@ Processing.init(this);
                 .addGap(3, 3, 3)
                 .addComponent(btn_processing_mode)
                 .addGap(3, 3, 3)
+                .addComponent(btn_deleting_mode)
+                .addGap(3, 3, 3)
+                .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
                 .addComponent(btn_undo)
                 .addGap(3, 3, 3)
                 .addComponent(btn_redo)
                 .addGap(3, 3, 3)
-                .addComponent(btn_deleting_mode)
-                .addGap(3, 3, 3)
                 .addComponent(btn_levelup)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                 .addComponent(btn_plus)
                 .addGap(3, 3, 3)
                 .addComponent(btn_minus)
@@ -184,18 +195,22 @@ Processing.init(this);
                 .addGap(3, 3, 3))
         );
         panel_topLayout.setVerticalGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(panel_topLayout.createSequentialGroup()
+            .addGroup(GroupLayout.Alignment.TRAILING, panel_topLayout.createSequentialGroup()
                 .addGap(3, 3, 3)
                 .addGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_view_mode)
-                    .addComponent(btn_processing_mode)
                     .addComponent(btn_levelup)
-                    .addComponent(btn_deleting_mode)
-                    .addComponent(btn_redo)
-                    .addComponent(btn_undo)
-                    .addComponent(btn_plus)
-                    .addComponent(btn_minus)
-                    .addComponent(btn_center))
+                    .addGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btn_undo)
+                        .addGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btn_plus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_view_mode, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_center, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_minus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_deleting_mode, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_processing_mode, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator1))
+                            .addComponent(btn_redo, GroupLayout.Alignment.LEADING))))
                 .addGap(3, 3, 3))
         );
 
@@ -230,7 +245,8 @@ Processing.init(this);
 
         label_image.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x32/picture_sunset.png"))); // NOI18N
         label_image.setAutoscrolls(true);
-        label_image.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+        label_image.addMouseListener(Listeners.image_mouse_listener);
+        label_image.addMouseMotionListener(Listeners.image_mouse_motion_listener);
 
         GroupLayout panel_imageLayout = new GroupLayout(panel_image);
         panel_image.setLayout(panel_imageLayout);
@@ -243,7 +259,7 @@ Processing.init(this);
         panel_imageLayout.setVerticalGroup(panel_imageLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(panel_imageLayout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(label_image, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(label_image)
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -401,7 +417,7 @@ Processing.init(this);
 public static void main (String args[]) {
 
 UA_Translator.init();
-Utils.set_Theme("GitHub_Dark");
+Utils.set_Theme(DEFAULT_APP_THEME);
 
 EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 
@@ -428,12 +444,13 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JButton btn_redo;
     protected static JButton btn_undo;
     protected static JButton btn_view_mode;
+    private JSeparator jSeparator1;
     protected static JLabel label_image;
     private JMenu menu_about;
     private JMenuBar menu_bar;
     private JMenu menu_file;
     private JMenu menu_settings;
-    private JMenu menu_theme;
+    protected static JMenu menu_theme;
     private JPanel panel_bottom;
     private JSplitPane panel_center;
     protected static JPanel panel_drop;

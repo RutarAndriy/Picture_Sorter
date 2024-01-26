@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
+import javax.swing.event.*;
 import java.awt.datatransfer.*;
 
 import static com.rutar.picture_sorter.Picture_Sorter.*;
@@ -132,6 +133,20 @@ btn.setIcon(Utils.get_Icon(btn.isSelected() ? "folder_blue" :
 
 ///////////////////////////////////////////////////////////////////////////////
 
+public static void tree_Value_Selected (TreeSelectionEvent tse) {                                  
+    
+Files_Tree_Node selected_node = (Files_Tree_Node)
+                tree.getLastSelectedPathComponent();
+
+if (selected_node == null ||
+    selected_node.file == null) { return; }
+
+label_image.setIcon(new ImageIcon(selected_node.file.getAbsolutePath()));
+
+}       
+
+///////////////////////////////////////////////////////////////////////////////
+
 public static void drag_And_Drop_Files (DropTargetDropEvent event) {
     
 event.acceptDrop(DnDConstants.ACTION_COPY);
@@ -152,7 +167,7 @@ for (DataFlavor flavor : flavors) {
         }
     }
     
-    catch (Exception e) { System.out.println(e); }
+    catch (Exception e) { e.printStackTrace(); }
     
 }
 

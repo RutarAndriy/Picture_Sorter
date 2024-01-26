@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
+import javax.swing.event.*;
 
 import static com.rutar.picture_sorter.Picture_Sorter.*;
 
@@ -56,6 +57,11 @@ public static final KeyEventDispatcher key_event_dispatcher = (KeyEvent e) -> {
     return false;
 
 };
+
+///////////////////////////////////////////////////////////////////////////////
+
+public static final TreeSelectionListener tree_selection_listener
+    = (TreeSelectionEvent tse) -> { Processing.tree_Value_Selected(tse); };
 
 ///////////////////////////////////////////////////////////////////////////////
 

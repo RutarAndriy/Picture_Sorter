@@ -90,7 +90,7 @@
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_redo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                  <Component id="btn_delete" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_deleting_mode" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="btn_levelup" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="135" max="32767" attributes="0"/>
@@ -113,7 +113,7 @@
                       <Component id="btn_view_mode" max="-2" attributes="0"/>
                       <Component id="btn_processing_mode" max="-2" attributes="0"/>
                       <Component id="btn_levelup" max="-2" attributes="0"/>
-                      <Component id="btn_delete" max="-2" attributes="0"/>
+                      <Component id="btn_deleting_mode" max="-2" attributes="0"/>
                       <Component id="btn_redo" max="-2" attributes="0"/>
                       <Component id="btn_undo" max="-2" attributes="0"/>
                       <Component id="btn_plus" max="-2" attributes="0"/>
@@ -180,12 +180,13 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="btn_delete">
+        <Component class="javax.swing.JButton" name="btn_deleting_mode">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/cross.png"/>
+              <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/bin_empty.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x412;&#x438;&#x434;&#x430;&#x43b;&#x438;&#x442;&#x438; &#x444;&#x430;&#x439;&#x43b;"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="actionCommand" type="java.lang.String" value="deleting_mode"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
@@ -273,7 +274,7 @@
         <Component class="javax.swing.JButton" name="btn_view_mode">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/arrow_out.png"/>
+              <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/arrow_in.png"/>
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="view_mode"/>
             <Property name="focusPainted" type="boolean" value="false"/>

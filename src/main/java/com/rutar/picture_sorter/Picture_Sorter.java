@@ -35,7 +35,7 @@ Processing.init(this);
         btn_processing_mode = new JButton();
         btn_undo = new JButton();
         btn_redo = new JButton();
-        btn_delete = new JButton();
+        btn_deleting_mode = new JButton();
         btn_levelup = new JButton();
         btn_plus = new JButton();
         btn_minus = new JButton();
@@ -98,11 +98,12 @@ Processing.init(this);
             }
         });
 
-        btn_delete.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/cross.png"))); // NOI18N
-        btn_delete.setToolTipText("Видалити файл");
-        btn_delete.setFocusPainted(false);
-        btn_delete.setMargin(new Insets(5, 5, 5, 5));
-        btn_delete.addActionListener(new ActionListener() {
+        btn_deleting_mode.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/bin_empty.png"))); // NOI18N
+        btn_deleting_mode.setToolTipText("");
+        btn_deleting_mode.setActionCommand("deleting_mode");
+        btn_deleting_mode.setFocusPainted(false);
+        btn_deleting_mode.setMargin(new Insets(5, 5, 5, 5));
+        btn_deleting_mode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
             }
@@ -148,7 +149,7 @@ Processing.init(this);
             }
         });
 
-        btn_view_mode.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_out.png"))); // NOI18N
+        btn_view_mode.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/arrow_in.png"))); // NOI18N
         btn_view_mode.setActionCommand("view_mode");
         btn_view_mode.setFocusPainted(false);
         btn_view_mode.setMargin(new Insets(5, 5, 5, 5));
@@ -169,7 +170,7 @@ Processing.init(this);
                 .addGap(3, 3, 3)
                 .addComponent(btn_redo)
                 .addGap(3, 3, 3)
-                .addComponent(btn_delete)
+                .addComponent(btn_deleting_mode)
                 .addGap(3, 3, 3)
                 .addComponent(btn_levelup)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
@@ -189,7 +190,7 @@ Processing.init(this);
                     .addComponent(btn_view_mode)
                     .addComponent(btn_processing_mode)
                     .addComponent(btn_levelup)
-                    .addComponent(btn_delete)
+                    .addComponent(btn_deleting_mode)
                     .addComponent(btn_redo)
                     .addComponent(btn_undo)
                     .addComponent(btn_plus)
@@ -410,7 +411,7 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected static JButton btn_center;
-    protected static JButton btn_delete;
+    protected static JButton btn_deleting_mode;
     protected static JButton btn_levelup;
     protected static JButton btn_minus;
     private JToggleButton btn_path_1;

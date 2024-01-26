@@ -15,14 +15,23 @@ public class Processing {
 
 private static Picture_Sorter app;
 
-private static boolean view_mode_fullsize;
-private static boolean processing_mode_copy;
+private static boolean view_mode_fullsize   = true;
+private static boolean deleting_mode_unsafe = true;
+private static boolean processing_mode_copy = true;
 
 private static final String[] folder_pathes = new String[9];
 
 ///////////////////////////////////////////////////////////////////////////////
 
-public static void init (Picture_Sorter application) { app = application; }
+public static void init (Picture_Sorter application) {
+    
+app = application;
+
+set_Processing_Mode(null);
+set_Deleting_Mode(null);
+set_View_Mode(null);
+
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -36,6 +45,8 @@ else if (command.equals("view_mode"))
     { set_View_Mode(ae); }
 else if (command.endsWith("processing_mode"))
     { set_Processing_Mode(ae); }
+else if (command.endsWith("deleting_mode"))
+    { set_Deleting_Mode(ae); }
 
 }
 
@@ -56,7 +67,24 @@ processing_mode_copy =! processing_mode_copy;
 btn_processing_mode.setIcon(Utils
                    .get_Icon(processing_mode_copy ? "calendar_copy" :
                                                     "cut_red"));
+btn_processing_mode.setToolTipText("Режим обробки: " +
+                                  (processing_mode_copy ? "копіювання" :
+                                                          "переміщення"));
 
+} 
+
+///////////////////////////////////////////////////////////////////////////////
+
+private static void set_Deleting_Mode (ActionEvent ae) {                               
+
+deleting_mode_unsafe =! deleting_mode_unsafe;
+
+btn_deleting_mode.setIcon(Utils
+                 .get_Icon(deleting_mode_unsafe ? "cross" :
+                                                  "bin_empty"));
+btn_deleting_mode.setToolTipText("Режим видалення: " +
+                                (deleting_mode_unsafe ? "повністю" :
+                                                        "корзина"));
 } 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -66,8 +94,10 @@ private static void set_View_Mode (ActionEvent ae) {
 view_mode_fullsize =! view_mode_fullsize;
 
 btn_view_mode.setIcon(Utils
-             .get_Icon(view_mode_fullsize ? "arrow_in" : "arrow_out"));
-
+             .get_Icon(view_mode_fullsize ? "arrow_out" :
+                                            "arrow_in"));
+btn_view_mode.setToolTipText(view_mode_fullsize ? "Оригінальний розмір" :
+                                                  "Режим масштабування");
 } 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import com.formdev.flatlaf.*;
 import com.formdev.flatlaf.util.*;
+import com.rutar.custom_flat_laf.themes.*;
 
 import static com.rutar.picture_sorter.Listeners.*;
 import static com.rutar.picture_sorter.Picture_Sorter.*;
@@ -27,6 +28,9 @@ private static final String[] themes = new String[] {
     "Flat_Dark",         "dark",
     "Intellij",          "light",
     "Darcula",           "dark",
+    ":",                 "-",
+    "Rutar_Light",       "light",
+    "Rutar_Dark",        "dark",
     ":",                 "-",
     "Arc",               "light",
     "Gray",              "light",
@@ -103,10 +107,13 @@ public static void set_Theme (String theme_name) {
 
     switch (theme_name) {
         
-        case "Flat_Light": FlatLightLaf.setup();    break;
-        case "Flat_Dark":  FlatDarkLaf.setup();     break;
-        case "Intellij":   FlatIntelliJLaf.setup(); break;
-        case "Darcula":    FlatDarculaLaf.setup();  break;
+        case "Flat_Light":  FlatLightLaf.setup();    break;
+        case "Flat_Dark":   FlatDarkLaf.setup();     break;
+        case "Intellij":    FlatIntelliJLaf.setup(); break;
+        case "Darcula":     FlatDarculaLaf.setup();  break;
+        
+        case "Rutar_Light": Rutar_Light.setup();     break;
+        case "Rutar_Dark":  Rutar_Dark.setup();      break;
         
         default: IntelliJTheme.setup(Picture_Sorter.class
                 .getResourceAsStream(THEME_PATH + theme_name + ".theme.json"));

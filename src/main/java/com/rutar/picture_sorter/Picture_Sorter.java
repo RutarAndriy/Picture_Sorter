@@ -36,15 +36,15 @@ Processing.init(this);
 
         panel_top = new JPanel();
         btn_processing_mode = new JButton();
+        btn_deleting_mode = new JButton();
+        sep_01 = new JSeparator();
         btn_undo = new JButton();
         btn_redo = new JButton();
-        btn_deleting_mode = new JButton();
         btn_levelup = new JButton();
         btn_plus = new JButton();
         btn_minus = new JButton();
         btn_center = new JButton();
         btn_view_mode = new JButton();
-        jSeparator1 = new JSeparator();
         panel_center = new JSplitPane();
         sp_left = new JPanel();
         panel_drop = new JPanel();
@@ -85,6 +85,19 @@ Processing.init(this);
             }
         });
 
+        btn_deleting_mode.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/bin_empty.png"))); // NOI18N
+        btn_deleting_mode.setToolTipText("");
+        btn_deleting_mode.setActionCommand("deleting_mode");
+        btn_deleting_mode.setFocusPainted(false);
+        btn_deleting_mode.setMargin(new Insets(5, 5, 5, 5));
+        btn_deleting_mode.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                button_Pressed(evt);
+            }
+        });
+
+        sep_01.setOrientation(SwingConstants.VERTICAL);
+
         btn_undo.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/undo.png"))); // NOI18N
         btn_undo.setToolTipText("Відмінити");
         btn_undo.setFocusPainted(false);
@@ -100,17 +113,6 @@ Processing.init(this);
         btn_redo.setFocusPainted(false);
         btn_redo.setMargin(new Insets(5, 5, 5, 5));
         btn_redo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                button_Pressed(evt);
-            }
-        });
-
-        btn_deleting_mode.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/bin_empty.png"))); // NOI18N
-        btn_deleting_mode.setToolTipText("");
-        btn_deleting_mode.setActionCommand("deleting_mode");
-        btn_deleting_mode.setFocusPainted(false);
-        btn_deleting_mode.setMargin(new Insets(5, 5, 5, 5));
-        btn_deleting_mode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
             }
@@ -166,8 +168,6 @@ Processing.init(this);
             }
         });
 
-        jSeparator1.setOrientation(SwingConstants.VERTICAL);
-
         GroupLayout panel_topLayout = new GroupLayout(panel_top);
         panel_top.setLayout(panel_topLayout);
         panel_topLayout.setHorizontalGroup(panel_topLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -177,7 +177,7 @@ Processing.init(this);
                 .addGap(3, 3, 3)
                 .addComponent(btn_deleting_mode)
                 .addGap(3, 3, 3)
-                .addComponent(jSeparator1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addComponent(sep_01, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(btn_undo)
                 .addGap(3, 3, 3)
@@ -209,7 +209,7 @@ Processing.init(this);
                                 .addComponent(btn_minus, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_deleting_mode, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btn_processing_mode, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jSeparator1))
+                                .addComponent(sep_01))
                             .addComponent(btn_redo, GroupLayout.Alignment.LEADING))))
                 .addGap(3, 3, 3))
         );
@@ -444,7 +444,6 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JButton btn_redo;
     protected static JButton btn_undo;
     protected static JButton btn_view_mode;
-    private JSeparator jSeparator1;
     protected static JLabel label_image;
     private JMenu menu_about;
     private JMenuBar menu_bar;
@@ -456,6 +455,7 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JPanel panel_drop;
     private JPanel panel_image;
     private JPanel panel_top;
+    private JSeparator sep_01;
     protected static JPanel sp_left;
     private JScrollPane sp_right;
     private JScrollPane sp_tree;

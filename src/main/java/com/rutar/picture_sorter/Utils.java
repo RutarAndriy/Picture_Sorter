@@ -5,6 +5,7 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import com.formdev.flatlaf.*;
+import com.formdev.flatlaf.ui.*;
 import com.formdev.flatlaf.util.*;
 import com.rutar.custom_flat_laf.themes.*;
 
@@ -28,9 +29,9 @@ private static final String[] themes = new String[] {
     "Flat_Dark",         "dark",
     "Intellij",          "light",
     "Darcula",           "dark",
-    ":",                 "-",
-    "Rutar_Light",       "light",
-    "Rutar_Dark",        "dark",
+//    ":",                 "-",
+//    "Rutar_Light",       "light",
+//    "Rutar_Dark",        "dark",
     ":",                 "-",
     "Arc",               "light",
     "Gray",              "light",
@@ -134,12 +135,16 @@ public static void set_Theme (String theme_name) {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-public static CompoundBorder get_Border (Color color) {
-    
-Border inside = new LineBorder(color, 2, true);
-Border outside = BorderFactory.createEmptyBorder(7, 7, 7, 7);
+public static Border get_Border (Color color) {
 
-return BorderFactory.createCompoundBorder(outside, inside);
+    if (color == null) { return new FlatScrollPaneBorder(); }
+
+    FlatScrollPaneBorder color_border = new FlatScrollPaneBorder();
+
+    color_border.applyStyleProperty("borderColor",        color);
+    color_border.applyStyleProperty("focusedBorderColor", color);
+
+    return color_border;
 
 }
 

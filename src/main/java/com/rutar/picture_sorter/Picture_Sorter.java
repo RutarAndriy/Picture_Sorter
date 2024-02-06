@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+import com.formdev.flatlaf.ui.*;
 import com.rutar.ua_translator.*;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -219,8 +220,7 @@ Processing.init(this);
         sp_left.setMinimumSize(new Dimension(150, 0));
         sp_left.setLayout(new CardLayout());
 
-        panel_drop.setBorder(Utils.get_Border(Listeners.DROP_EXIT)
-        );
+        panel_drop.setBorder(new FlatScrollPaneBorder());
 
         GroupLayout panel_dropLayout = new GroupLayout(panel_drop);
         panel_drop.setLayout(panel_dropLayout);
@@ -452,7 +452,7 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JMenu menu_theme;
     private JPanel panel_bottom;
     private JSplitPane panel_center;
-    protected static JPanel panel_drop;
+    public static JPanel panel_drop;
     private JPanel panel_image;
     private JPanel panel_top;
     private JSeparator sep_01;

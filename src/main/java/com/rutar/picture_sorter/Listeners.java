@@ -12,8 +12,8 @@ import static com.rutar.picture_sorter.Picture_Sorter.*;
 
 public class Listeners {
 
-public static final Color DROP_ENTER = new Color(0x6666ff);
-public static final Color DROP_EXIT  = new Color(0x777777);
+private static final Color DROP_ENTER = new Color(0x6666ff);
+private static final Color DROP_EXIT  = null;
 
 private static final Cursor CURSOR_HAND = new Cursor(Cursor.HAND_CURSOR);
 private static final Cursor CURSOR_MOVE = new Cursor(Cursor.MOVE_CURSOR);
@@ -69,7 +69,10 @@ private static final DropTargetListener drop_target_listener
                = new DropTargetAdapter() {
 
 @Override
-public void drop (DropTargetDropEvent e) { Processing.drag_And_Drop_Files(e); }
+public void drop (DropTargetDropEvent e) {
+    Processing.drag_And_Drop_Files(e);
+    panel_drop.setBorder(Utils.get_Border(DROP_EXIT));
+}
 
 // ............................................................................
 

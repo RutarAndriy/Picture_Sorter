@@ -167,12 +167,11 @@ for (DataFlavor flavor : flavors) {
         }
     }
     
-    catch (Exception e) { e.printStackTrace(); }
-    
+    catch (UnsupportedFlavorException | IOException e) { }
+
 }
 
 ((CardLayout)sp_left.getLayout()).last(sp_left);
-panel_drop.setBorder(Utils.get_Border(Listeners.DROP_EXIT));
 event.dropComplete(true);
     
 }

@@ -48,7 +48,17 @@ Processing.init(this);
         btn_view_mode = new JButton();
         panel_center = new JSplitPane();
         sp_left = new JPanel();
-        panel_drop = new JPanel();
+        panel_drop = new JPanel() {
+
+            @Override
+            public void paintComponent (Graphics g) {
+
+                super.paintComponents(g);
+
+                Utils.draw_Dropable_Background((Graphics2D) g);
+
+            }
+        };
         sp_tree = new JScrollPane();
         tree = new JTree();
         tree.addTreeSelectionListener(Listeners.tree_selection_listener);

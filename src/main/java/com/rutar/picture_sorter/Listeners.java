@@ -12,11 +12,12 @@ import static com.rutar.picture_sorter.Picture_Sorter.*;
 
 public class Listeners {
 
-private static final Color DROP_ENTER = new Color(0x6666ff);
-private static final Color DROP_EXIT  = null;
+private static final Color DRAGABLE_COLOR = new Color(0x6666ff);
 
 private static final Cursor CURSOR_HAND = new Cursor(Cursor.HAND_CURSOR);
 private static final Cursor CURSOR_MOVE = new Cursor(Cursor.MOVE_CURSOR);
+
+public static boolean ACTIVE_DRAG;
 
 // ............................................................................
 
@@ -32,6 +33,10 @@ KeyboardFocusManager.getCurrentKeyboardFocusManager()
 drop_target = new DropTarget(sp_left, drop_target_listener);
 
 }
+
+///////////////////////////////////////////////////////////////////////////////
+
+public static Color get_Dragable_Color() { return DRAGABLE_COLOR; }
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -71,21 +76,24 @@ private static final DropTargetListener drop_target_listener
 @Override
 public void drop (DropTargetDropEvent e) {
     Processing.drag_And_Drop_Files(e);
-    panel_drop.setBorder(Utils.get_Border(DROP_EXIT));
+    ACTIVE_DRAG = false;
+    panel_drop.setBorder(Utils.get_Border(null));
 }
 
 // ............................................................................
 
 @Override
 public void dragEnter (DropTargetDragEvent e) {
-    panel_drop.setBorder(Utils.get_Border(DROP_ENTER));
+    ACTIVE_DRAG = true;
+    panel_drop.setBorder(Utils.get_Border(DRAGABLE_COLOR));
 }
 
 // ............................................................................
 
 @Override
 public void dragExit (DropTargetEvent e) {
-    panel_drop.setBorder(Utils.get_Border(DROP_EXIT));
+    ACTIVE_DRAG = false;
+    panel_drop.setBorder(Utils.get_Border(null));
 }
              
 };

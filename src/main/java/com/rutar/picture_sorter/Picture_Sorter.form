@@ -337,6 +337,7 @@
                 </Property>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new JPanel() {&#xa;&#xa;@Override&#xa;public void paintComponent (Graphics g) {&#xa;&#xa;super.paintComponents(g);&#xa; &#xa;Utils.draw_Dropable_Background((Graphics2D) g);&#xa;&#xa;}&#xa;}"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
               <Constraints>

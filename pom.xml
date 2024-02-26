@@ -119,17 +119,12 @@
                                 <exclude>META-INF/*.txt</exclude>
                             </excludes>
                         </filter>
-                        <!--
                         <filter>
-                            <artifact>[groupId]:[artifactId]</artifact>
+                            <artifact>com.formdev:flatlaf</artifact>
                             <includes>
-                                <include>com/rutar/example/**</include>
+                                <include>com/formdev/flatlaf/**</include>
                             </includes>
-                            <excludes>
-                                <exclude>com/rutar/example/Example*</exclude>
-                            </excludes>
                         </filter>
-                        -->
                     </filters>
                 </configuration>
                 <executions>

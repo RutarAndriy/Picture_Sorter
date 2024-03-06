@@ -108,15 +108,15 @@ public static void set_Theme (String theme_name) {
 
     switch (theme_name) {
         
-        case "Flat_Light":  FlatLightLaf.setup();    break;
-        case "Flat_Dark":   FlatDarkLaf.setup();     break;
-        case "Intellij":    FlatIntelliJLaf.setup(); break;
-        case "Darcula":     FlatDarculaLaf.setup();  break;
+        case "Flat_Light"  -> FlatLightLaf.setup();
+        case "Flat_Dark"   -> FlatDarkLaf.setup();
+        case "Intellij"    -> FlatIntelliJLaf.setup();
+        case "Darcula"     -> FlatDarculaLaf.setup();
         
-        case "Rutar_Light": Rutar_Light.setup();     break;
-        case "Rutar_Dark":  Rutar_Dark.setup();      break;
+        case "Rutar_Light" -> Rutar_Light.setup();
+        case "Rutar_Dark"  -> Rutar_Dark.setup();
         
-        default: IntelliJTheme.setup(Picture_Sorter.class
+        default -> IntelliJTheme.setup(Picture_Sorter.class
                 .getResourceAsStream(THEME_PATH + theme_name + ".theme.json"));
         
     }
@@ -152,45 +152,6 @@ public static Border get_Border (Color color) {
 
 public static URL get_Resource (String path) {
     return Utils.class.getResource(path);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-private static int W;
-private static int H;
-
-private static final int STEP = 5;
-private static final int INDENT = 5;
-
-// ............................................................................
-
-private static final float[] dashing_pattern = { 10f, 10f, 1f, 10f };
-private static final Stroke stroke = new BasicStroke
-    (4f, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER,
-     1.0f, dashing_pattern, 0.0f);
-
-// ............................................................................
-
-public static void draw_Dropable_Background (Graphics2D g) {
-
-W = panel_drop.getWidth();
-H = panel_drop.getHeight();
-
-Shape old_clip = g.getClip();
-
-g.setColor(panel_drop.getBackground());
-g.fillRect(0, 0, W, H);
-
-g.setStroke(stroke);
-g.setColor(get_Dragable_Color());
-g.setClip(INDENT, INDENT, W-INDENT*2, H-INDENT*2);
-
-if (ACTIVE_DRAG) {
-    for (int z = 0; z < H + W; z+=STEP*2) { g.drawLine(0, z*STEP, z*STEP, 0); }
-}
-
-g.setClip(old_clip);
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////

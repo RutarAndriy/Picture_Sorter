@@ -1,5 +1,6 @@
 package com.rutar.picture_sorter;
 
+import com.rutar.jdroppablepanel.JDroppablePanelUtils;
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
@@ -148,31 +149,11 @@ label_image.setIcon(new ImageIcon(selected_node.file.getAbsolutePath()));
 ///////////////////////////////////////////////////////////////////////////////
 
 public static void drag_And_Drop_Files (DropTargetDropEvent event) {
-    
-event.acceptDrop(DnDConstants.ACTION_COPY);
-Transferable transferable = event.getTransferable();
-DataFlavor[] flavors = transferable.getTransferDataFlavors();
 
-for (DataFlavor flavor : flavors) {
-
-    try {
-
-        if (flavor.isFlavorJavaFileListType()) {
-
-            File[] files = ((java.util.List<File>) transferable
-                            .getTransferData(flavor)).toArray(new File[0]);
-            
-            Files_Tree.create_Files_Tree(files);
-            
-        }
-    }
-    
-    catch (UnsupportedFlavorException | IOException e) { }
-
-}
+File[] droppable_files = JDroppablePanelUtils.getDroppableFiles(event);
+Files_Tree.create_Files_Tree(droppable_files);
 
 ((CardLayout)sp_left.getLayout()).last(sp_left);
-event.dropComplete(true);
     
 }
 

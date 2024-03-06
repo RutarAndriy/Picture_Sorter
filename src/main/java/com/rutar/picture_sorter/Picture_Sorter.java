@@ -6,13 +6,19 @@ import java.awt.event.*;
 
 import com.formdev.flatlaf.ui.*;
 import com.rutar.ua_translator.*;
-import javax.swing.tree.TreeSelectionModel;
+import com.rutar.jdroppablepanel.*;
+
+import static com.rutar.picture_sorter.Listeners.*;
+import static javax.swing.tree.TreeSelectionModel.*;
 
 // ............................................................................
 
 public class Picture_Sorter extends JFrame {
 
 public static final String DEFAULT_APP_THEME = "GitHub_Dark";
+
+private static final Color COLOR_ACTIVE   = new Color(0xffff66);
+private static final Color COLOR_DRAGABLE = new Color(0x6666ff);
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -32,8 +38,7 @@ Processing.init(this);
 ///////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() {//GEN-BEGIN:initComponents
 
         panel_top = new JPanel();
         btn_processing_mode = new JButton();
@@ -48,21 +53,11 @@ Processing.init(this);
         btn_view_mode = new JButton();
         panel_center = new JSplitPane();
         sp_left = new JPanel();
-        panel_drop = new JPanel() {
-
-            @Override
-            public void paintComponent (Graphics g) {
-
-                super.paintComponents(g);
-
-                Utils.draw_Dropable_Background((Graphics2D) g);
-
-            }
-        };
+        panel_drop = new JDroppablePanel();
         sp_tree = new JScrollPane();
         tree = new JTree();
-        tree.addTreeSelectionListener(Listeners.tree_selection_listener);
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tree.addTreeSelectionListener(tree_selection_listener);
+        tree.getSelectionModel().setSelectionMode(SINGLE_TREE_SELECTION);
         tree.setRootVisible(false);
         sp_right = new JScrollPane();
         panel_image = new JPanel();
@@ -230,15 +225,18 @@ Processing.init(this);
         sp_left.setMinimumSize(new Dimension(150, 0));
         sp_left.setLayout(new CardLayout());
 
-        panel_drop.setBorder(new FlatScrollPaneBorder());
+        panel_drop.setActiveBorder(Utils.get_Border(COLOR_DRAGABLE));
+        panel_drop.setPassiveBorder(new FlatScrollPaneBorder());
+        panel_drop.setSecondLineDraw(false);
+        panel_drop.addDropTargetListener(drop_target_listener);
 
         GroupLayout panel_dropLayout = new GroupLayout(panel_drop);
         panel_drop.setLayout(panel_dropLayout);
         panel_dropLayout.setHorizontalGroup(panel_dropLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+            .addGap(0, 194, Short.MAX_VALUE)
         );
         panel_dropLayout.setVerticalGroup(panel_dropLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
+            .addGap(0, 174, Short.MAX_VALUE)
         );
 
         sp_left.add(panel_drop, "card_drop");
@@ -247,7 +245,7 @@ Processing.init(this);
         tree.setCellRenderer(new Icon_Node_Renderer());
         sp_tree.setViewportView(tree);
 
-        sp_left.add(sp_tree, "card4");
+        sp_left.add(sp_tree, "card_tree");
 
         panel_center.setLeftComponent(sp_left);
 
@@ -414,7 +412,7 @@ Processing.init(this);
 
         setSize(new Dimension(460, 310));
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }//GEN-END:initComponents
 
 ///////////////////////////////////////////////////////////////////////////////
     
@@ -462,7 +460,7 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JMenu menu_theme;
     private JPanel panel_bottom;
     private JSplitPane panel_center;
-    public static JPanel panel_drop;
+    private JDroppablePanel panel_drop;
     private JPanel panel_image;
     private JPanel panel_top;
     private JSeparator sep_01;

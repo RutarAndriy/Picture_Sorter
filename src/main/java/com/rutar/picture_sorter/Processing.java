@@ -142,7 +142,7 @@ Files_Tree_Node selected_node = (Files_Tree_Node)
 if (selected_node == null ||
     selected_node.file == null) { return; }
 
-label_image.setIcon(new ImageIcon(selected_node.file.getAbsolutePath()));
+//label_image.setIcon(new ImageIcon(selected_node.file.getAbsolutePath()));
 
 }       
 

@@ -7,6 +7,7 @@ import java.awt.event.*;
 import com.formdev.flatlaf.ui.*;
 import com.rutar.ua_translator.*;
 import com.rutar.jdroppablepanel.*;
+import com.rutar.jimageview.JImageView;
 
 import static com.rutar.picture_sorter.Listeners.*;
 import static javax.swing.tree.TreeSelectionModel.*;
@@ -26,6 +27,9 @@ public Picture_Sorter() {
 
 initComponents();
 
+imave_view = new JImageView();
+panel_center.setRightComponent(imave_view);
+
 setMinimumSize(getSize());
 setSize(680, 520);
 setLocationRelativeTo(null);
@@ -38,7 +42,8 @@ Processing.init(this);
 ///////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings("unchecked")
-    private void initComponents() {//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
         panel_top = new JPanel();
         btn_processing_mode = new JButton();
@@ -59,9 +64,6 @@ Processing.init(this);
         tree.addTreeSelectionListener(tree_selection_listener);
         tree.getSelectionModel().setSelectionMode(SINGLE_TREE_SELECTION);
         tree.setRootVisible(false);
-        sp_right = new JScrollPane();
-        panel_image = new JPanel();
-        label_image = new JLabel();
         panel_bottom = new JPanel();
         btn_path_1 = new JToggleButton();
         btn_path_2 = new JToggleButton();
@@ -249,32 +251,6 @@ Processing.init(this);
 
         panel_center.setLeftComponent(sp_left);
 
-        sp_right.setMinimumSize(new Dimension(100, 100));
-
-        label_image.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x32/picture_sunset.png"))); // NOI18N
-        label_image.setAutoscrolls(true);
-        label_image.addMouseListener(Listeners.image_mouse_listener);
-        label_image.addMouseMotionListener(Listeners.image_mouse_motion_listener);
-
-        GroupLayout panel_imageLayout = new GroupLayout(panel_image);
-        panel_image.setLayout(panel_imageLayout);
-        panel_imageLayout.setHorizontalGroup(panel_imageLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(panel_imageLayout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(label_image)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panel_imageLayout.setVerticalGroup(panel_imageLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(panel_imageLayout.createSequentialGroup()
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(label_image)
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        sp_right.setViewportView(panel_image);
-
-        panel_center.setRightComponent(sp_right);
-
         panel_bottom.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         panel_bottom.setLayout(new GridLayout(1, 0, 3, 3));
 
@@ -412,7 +388,7 @@ Processing.init(this);
 
         setSize(new Dimension(460, 310));
         setLocationRelativeTo(null);
-    }//GEN-END:initComponents
+    }// </editor-fold>//GEN-END:initComponents
 
 ///////////////////////////////////////////////////////////////////////////////
     
@@ -452,7 +428,6 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JButton btn_redo;
     protected static JButton btn_undo;
     protected static JButton btn_view_mode;
-    protected static JLabel label_image;
     private JMenu menu_about;
     private JMenuBar menu_bar;
     private JMenu menu_file;
@@ -461,15 +436,15 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     private JPanel panel_bottom;
     private JSplitPane panel_center;
     private JDroppablePanel panel_drop;
-    private JPanel panel_image;
     private JPanel panel_top;
     private JSeparator sep_01;
     protected static JPanel sp_left;
-    private JScrollPane sp_right;
     private JScrollPane sp_tree;
     protected static JTree tree;
     // End of variables declaration//GEN-END:variables
 
+    private JImageView imave_view;
+    
 ///////////////////////////////////////////////////////////////////////////////
 
 }

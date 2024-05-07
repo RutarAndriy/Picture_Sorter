@@ -82,26 +82,26 @@ public static MouseMotionListener image_mouse_motion_listener
 @Override
 public void mouseDragged (MouseEvent me) {
 
-    if (origin != null) {
-                      
-        if (!drug_image_out && !cursor_on_image) { return; }
+//    if (origin != null) {
+//                      
+//        if (!drug_image_out && !cursor_on_image) { return; }
+//        
+//        viewport = (JViewport) SwingUtilities
+//                   .getAncestorOfClass(JViewport.class, label_image);
         
-        viewport = (JViewport) SwingUtilities
-                   .getAncestorOfClass(JViewport.class, label_image);
-        
-        if (viewport != null) {
+//        if (viewport != null) {
             
-            int deltaX = origin.x - me.getX();
-            int deltaY = origin.y - me.getY();
+//            int deltaX = origin.x - me.getX();
+//            int deltaY = origin.y - me.getY();
+//
+//            Rectangle view = viewport.getViewRect();
+//            view.x += deltaX;
+//            view.y += deltaY;
 
-            Rectangle view = viewport.getViewRect();
-            view.x += deltaX;
-            view.y += deltaY;
-
-            label_image.scrollRectToVisible(view);
+            //label_image.scrollRectToVisible(view);
             
-        }
-    }
+//        }
+//    }
 }
 };
 
@@ -121,14 +121,14 @@ public void mouseExited (MouseEvent me) { cursor_on_image = false; }
 @Override
 public void mousePressed (MouseEvent me) {
     origin = new Point(me.getPoint());
-    label_image.setCursor(CURSOR_HAND);
+    //label_image.setCursor(CURSOR_HAND);
 }
 
 // ............................................................................
 
 @Override
 public void mouseReleased (MouseEvent me) {
-    label_image.setCursor(CURSOR_MOVE);
+    //label_image.setCursor(CURSOR_MOVE);
 }
 
 };

@@ -66,6 +66,13 @@
 	    <version>v1.2.0</version>
 	</dependency>
         
+        <!-- Бібліотека для відображення растрових рображень -->
+        <dependency>
+	    <groupId>com.github.RutarAndriy</groupId>
+	    <artifactId>JImageView</artifactId>
+	    <version>v1.0.0</version>
+	</dependency>
+        
         <!-- Українська локалізація елементів інтерфейсу -->
         <dependency>
 	    <groupId>com.github.RutarAndriy</groupId>

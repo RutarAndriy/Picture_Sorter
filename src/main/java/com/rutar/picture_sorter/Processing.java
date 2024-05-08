@@ -1,13 +1,13 @@
 package com.rutar.picture_sorter;
 
-import com.rutar.jdroppablepanel.JDroppablePanelUtils;
 import java.io.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
 import javax.swing.event.*;
-import java.awt.datatransfer.*;
+import com.rutar.jimageview.*;
+import com.rutar.jdroppablepanel.*;
 
 import static com.rutar.picture_sorter.Picture_Sorter.*;
 
@@ -142,7 +142,8 @@ Files_Tree_Node selected_node = (Files_Tree_Node)
 if (selected_node == null ||
     selected_node.file == null) { return; }
 
-//label_image.setIcon(new ImageIcon(selected_node.file.getAbsolutePath()));
+File file = new File(selected_node.file.getAbsolutePath());
+image_view.setImage(JImageViewUtils.getImageQuickly(file));
 
 }       
 

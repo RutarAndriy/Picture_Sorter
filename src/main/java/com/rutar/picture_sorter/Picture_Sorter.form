@@ -159,12 +159,12 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/bin_empty.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="actionCommand" type="java.lang.String" value="deleting_mode"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -183,11 +183,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/undo.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x412;&#x456;&#x434;&#x43c;&#x456;&#x43d;&#x438;&#x442;&#x438;"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x412;&#x456;&#x434;&#x43c;&#x456;&#x43d;&#x438;&#x442;&#x438;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -201,11 +201,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/redo.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x41f;&#x43e;&#x432;&#x442;&#x43e;&#x440;&#x438;&#x442;&#x438;"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x41f;&#x43e;&#x432;&#x442;&#x43e;&#x440;&#x438;&#x442;&#x438;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -219,11 +219,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/hand_point_090.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x435;&#x439;&#x442;&#x438; &#x43d;&#x430; &#x440;&#x456;&#x432;&#x435;&#x43d;&#x44c; &#x432;&#x432;&#x435;&#x440;&#x445;"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x435;&#x439;&#x442;&#x438; &#x43d;&#x430; &#x440;&#x456;&#x432;&#x435;&#x43d;&#x44c; &#x432;&#x432;&#x435;&#x440;&#x445;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -237,11 +237,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/magnifier_zoom_in.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x417;&#x431;&#x456;&#x43b;&#x44c;&#x448;&#x438;&#x442;&#x438;"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x417;&#x431;&#x456;&#x43b;&#x44c;&#x448;&#x438;&#x442;&#x438;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -255,11 +255,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/magnifier_zoom_out.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x417;&#x43c;&#x435;&#x43d;&#x448;&#x438;&#x442;&#x438;"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x417;&#x43c;&#x435;&#x43d;&#x448;&#x438;&#x442;&#x438;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -273,11 +273,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/rutar/picture_sorter/icons/x16/zoom_fit.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="&#x426;&#x435;&#x43d;&#x442;&#x440;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[5, 5, 5, 5]"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="&#x426;&#x435;&#x43d;&#x442;&#x440;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_Pressed"/>
@@ -389,6 +389,19 @@
             </Container>
           </SubComponents>
         </Container>
+        <Component class="com.rutar.jimageview.JImageView" name="image_view">
+          <Properties>
+            <Property name="imageOpenSize" type="int" value="1"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="12"/>
+          </AuxValues>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
+              <JSplitPaneConstraints position="right"/>
+            </Constraint>
+          </Constraints>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="panel_bottom">

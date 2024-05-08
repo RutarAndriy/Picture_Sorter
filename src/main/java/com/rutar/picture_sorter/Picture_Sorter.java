@@ -27,9 +27,6 @@ public Picture_Sorter() {
 
 initComponents();
 
-imave_view = new JImageView();
-panel_center.setRightComponent(imave_view);
-
 setMinimumSize(getSize());
 setSize(680, 520);
 setLocationRelativeTo(null);
@@ -42,8 +39,7 @@ Processing.init(this);
 ///////////////////////////////////////////////////////////////////////////////
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() {//GEN-BEGIN:initComponents
 
         panel_top = new JPanel();
         btn_processing_mode = new JButton();
@@ -64,6 +60,7 @@ Processing.init(this);
         tree.addTreeSelectionListener(tree_selection_listener);
         tree.getSelectionModel().setSelectionMode(SINGLE_TREE_SELECTION);
         tree.setRootVisible(false);
+        image_view = new JImageView();
         panel_bottom = new JPanel();
         btn_path_1 = new JToggleButton();
         btn_path_2 = new JToggleButton();
@@ -94,10 +91,10 @@ Processing.init(this);
         });
 
         btn_deleting_mode.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/bin_empty.png"))); // NOI18N
-        btn_deleting_mode.setToolTipText("");
         btn_deleting_mode.setActionCommand("deleting_mode");
         btn_deleting_mode.setFocusPainted(false);
         btn_deleting_mode.setMargin(new Insets(5, 5, 5, 5));
+        btn_deleting_mode.setToolTipText("");
         btn_deleting_mode.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -107,9 +104,9 @@ Processing.init(this);
         sep_01.setOrientation(SwingConstants.VERTICAL);
 
         btn_undo.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/undo.png"))); // NOI18N
-        btn_undo.setToolTipText("Відмінити");
         btn_undo.setFocusPainted(false);
         btn_undo.setMargin(new Insets(5, 5, 5, 5));
+        btn_undo.setToolTipText("Відмінити");
         btn_undo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -117,9 +114,9 @@ Processing.init(this);
         });
 
         btn_redo.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/redo.png"))); // NOI18N
-        btn_redo.setToolTipText("Повторити");
         btn_redo.setFocusPainted(false);
         btn_redo.setMargin(new Insets(5, 5, 5, 5));
+        btn_redo.setToolTipText("Повторити");
         btn_redo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -127,9 +124,9 @@ Processing.init(this);
         });
 
         btn_levelup.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/hand_point_090.png"))); // NOI18N
-        btn_levelup.setToolTipText("Перейти на рівень вверх");
         btn_levelup.setFocusPainted(false);
         btn_levelup.setMargin(new Insets(5, 5, 5, 5));
+        btn_levelup.setToolTipText("Перейти на рівень вверх");
         btn_levelup.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -137,9 +134,9 @@ Processing.init(this);
         });
 
         btn_plus.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/magnifier_zoom_in.png"))); // NOI18N
-        btn_plus.setToolTipText("Збільшити");
         btn_plus.setFocusPainted(false);
         btn_plus.setMargin(new Insets(5, 5, 5, 5));
+        btn_plus.setToolTipText("Збільшити");
         btn_plus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -147,9 +144,9 @@ Processing.init(this);
         });
 
         btn_minus.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/magnifier_zoom_out.png"))); // NOI18N
-        btn_minus.setToolTipText("Зменшити");
         btn_minus.setFocusPainted(false);
         btn_minus.setMargin(new Insets(5, 5, 5, 5));
+        btn_minus.setToolTipText("Зменшити");
         btn_minus.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -157,9 +154,9 @@ Processing.init(this);
         });
 
         btn_center.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/zoom_fit.png"))); // NOI18N
-        btn_center.setToolTipText("Центрувати");
         btn_center.setFocusPainted(false);
         btn_center.setMargin(new Insets(5, 5, 5, 5));
+        btn_center.setToolTipText("Центрувати");
         btn_center.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 button_Pressed(evt);
@@ -250,6 +247,9 @@ Processing.init(this);
         sp_left.add(sp_tree, "card_tree");
 
         panel_center.setLeftComponent(sp_left);
+
+        image_view.setImageOpenSize(JImageView.OPEN_SIZE_INTERNAL_FIT);
+        panel_center.setRightComponent(image_view);
 
         panel_bottom.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
         panel_bottom.setLayout(new GridLayout(1, 0, 3, 3));
@@ -388,7 +388,7 @@ Processing.init(this);
 
         setSize(new Dimension(460, 310));
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }//GEN-END:initComponents
 
 ///////////////////////////////////////////////////////////////////////////////
     
@@ -428,6 +428,7 @@ EventQueue.invokeLater(() -> { new Picture_Sorter().setVisible(true); });
     protected static JButton btn_redo;
     protected static JButton btn_undo;
     protected static JButton btn_view_mode;
+    protected static JImageView image_view;
     private JMenu menu_about;
     private JMenuBar menu_bar;
     private JMenu menu_file;

@@ -9,6 +9,7 @@ import javax.swing.event.*;
 import com.rutar.jimageview.*;
 import com.rutar.jdroppablepanel.*;
 
+import static com.rutar.jimageview.JImageView.*;
 import static com.rutar.picture_sorter.Picture_Sorter.*;
 
 // ............................................................................
@@ -50,6 +51,10 @@ else if (command.endsWith("processing_mode"))
 else if (command.endsWith("deleting_mode"))
     { set_Deleting_Mode(ae); }
 
+switch (command) {
+    case "zoom_in" ->  { image_view.zoomIn(null);  }
+    case "zoom_out" -> { image_view.zoomOut(null); }
+}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -143,6 +148,11 @@ if (selected_node == null ||
     selected_node.file == null) { return; }
 
 File file = new File(selected_node.file.getAbsolutePath());
+
+if (file.isDirectory())
+     { image_view.setImageOpenSize(OPEN_SIZE_ORIGINAL);     }
+else { image_view.setImageOpenSize(OPEN_SIZE_INTERNAL_FIT); }
+
 image_view.setImage(JImageViewUtils.getImageQuickly(file));
 
 }       
@@ -155,7 +165,7 @@ File[] droppable_files = JDroppablePanelUtils.getDroppableFiles(event);
 Files_Tree.create_Files_Tree(droppable_files);
 
 ((CardLayout)sp_left.getLayout()).last(sp_left);
-    
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////

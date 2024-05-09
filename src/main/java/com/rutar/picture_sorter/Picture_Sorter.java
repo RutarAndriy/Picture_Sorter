@@ -134,6 +134,7 @@ Processing.init(this);
         });
 
         btn_plus.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/magnifier_zoom_in.png"))); // NOI18N
+        btn_plus.setActionCommand("zoom_in");
         btn_plus.setFocusPainted(false);
         btn_plus.setMargin(new Insets(5, 5, 5, 5));
         btn_plus.setToolTipText("Збільшити");
@@ -144,6 +145,7 @@ Processing.init(this);
         });
 
         btn_minus.setIcon(new ImageIcon(getClass().getResource("/com/rutar/picture_sorter/icons/x16/magnifier_zoom_out.png"))); // NOI18N
+        btn_minus.setActionCommand("zoom_out");
         btn_minus.setFocusPainted(false);
         btn_minus.setMargin(new Insets(5, 5, 5, 5));
         btn_minus.setToolTipText("Зменшити");
@@ -248,7 +250,7 @@ Processing.init(this);
 
         panel_center.setLeftComponent(sp_left);
 
-        image_view.setImageOpenSize(JImageView.OPEN_SIZE_INTERNAL_FIT);
+        image_view.setGridVisible(false);
         panel_center.setRightComponent(image_view);
 
         panel_bottom.setBorder(BorderFactory.createEmptyBorder(0, 3, 0, 3));
